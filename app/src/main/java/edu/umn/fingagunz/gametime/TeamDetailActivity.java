@@ -23,19 +23,19 @@ public class TeamDetailActivity
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setDisplayShowTitleEnabled(false);
 
-		ActionBar.Tab tab =
+		ActionBar.Tab gamesTab =
 			actionBar
 				.newTab()
 				.setIcon(R.mipmap.ic_calendar_black_36dp)
 				.setTabListener(new TeamDetailTabListener<>(this, "Games", TeamDetailGamesFragment.class));
-		actionBar.addTab(tab);
+		actionBar.addTab(gamesTab);
 
-		ActionBar.Tab other =
+		ActionBar.Tab playersTab =
 			actionBar
 				.newTab()
 				.setIcon(R.mipmap.ic_account_multiple_black_36dp)
 				.setTabListener(new TeamDetailTabListener<>(this, "Players", TeamDetailPlayersFragment.class));
-		actionBar.addTab(other);
+		actionBar.addTab(playersTab);
 	}
 
 
