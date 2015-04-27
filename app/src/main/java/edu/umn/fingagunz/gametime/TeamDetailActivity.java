@@ -26,14 +26,14 @@ public class TeamDetailActivity
 		ActionBar.Tab tab =
 			actionBar
 				.newTab()
-				.setText("Games")
+				.setIcon(R.mipmap.ic_calendar_black_36dp)
 				.setTabListener(new TeamDetailTabListener<>(this, "Games", TeamDetailGamesFragment.class));
 		actionBar.addTab(tab);
 
 		ActionBar.Tab other =
 			actionBar
 				.newTab()
-				.setText("Players")
+				.setIcon(R.mipmap.ic_account_multiple_black_36dp)
 				.setTabListener(new TeamDetailTabListener<>(this, "Players", TeamDetailPlayersFragment.class));
 		actionBar.addTab(other);
 	}
