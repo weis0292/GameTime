@@ -49,10 +49,15 @@ public class ProfileActivity extends Activity
 			}
 			else
 			{
-				getPreferences(Context.MODE_PRIVATE)
+				getSharedPreferences(getString(R.string.preferences_profile), Context.MODE_PRIVATE)
 					.edit()
 					.putString(getString(R.string.profile_name_key), name)
 					.commit();
+
+				// Looks like we've gotten a valid name,
+				// let's get the heck outta here.
+				setResult(RESULT_OK);
+				finish();
 			}
 
 			return true;

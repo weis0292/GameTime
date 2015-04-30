@@ -16,6 +16,7 @@
 
 	<string name="profile_name_label">Name</string>
 
+	<string name="preferences_profile">profile_preferences</string>
 	<string name="profile_name_key">profile_name</string>
 
 </resources>

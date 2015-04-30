@@ -20,7 +20,7 @@ public class TeamsActivity extends ListActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_teams);
 
-		SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
+		SharedPreferences preferences = getSharedPreferences(getString(R.string.preferences_profile), Context.MODE_PRIVATE);
 		String name = preferences.getString(getString(R.string.profile_name_key), "");
 		if (TextUtils.isEmpty(name))
 		{
