@@ -1,12 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">GameTime</string>
-	<string name="title_activity_teams">TeamsActivity</string>
 
-	<string name="hello_world">Hello world!</string>
-	<string name="action_settings">Settings</string>
-	<string name="title_activity_team_detail">TeamDetailActivity</string>
+    <string name="app_name">GameTime</string>
+    <string name="title_activity_teams">TeamsActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_team_detail">TeamDetailActivity</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-	<string name="hello_games_fragment">Hello blank games fragment</string>
-	<string name="hello_players_fragment">Hello blank players fragment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_games_fragment">Hello blank games fragment</string>
+    <string name="hello_players_fragment">Hello blank players fragment</string>
+    <string name="title_activity_profile">Profile</string>
+
+	<string name="action_accept">Accept</string>
+
+	<string name="profile_name_label">Name</string>
+
+	<string name="profile_name_key">profile_name</string>
+
 </resources>

@@ -1,35 +1,22 @@
 package edu.umn.fingagunz.gametime;
 
-import android.app.ListActivity;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 
-public class TeamsActivity extends ListActivity
+public class ProfileActivity extends Activity
 {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_teams);
-
-		SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
-		String name = preferences.getString(getString(R.string.profile_name_key), "");
-		if (TextUtils.isEmpty(name))
-		{
-			Intent intent = new Intent(this, ProfileActivity.class);
-			startActivity(intent);
-		}
-
-//		Intent intent = new Intent(this, TeamDetailActivity.class);
-//		startActivity(intent);
+		setContentView(R.layout.activity_profile);
 	}
 
 
@@ -37,7 +24,7 @@ public class TeamsActivity extends ListActivity
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.menu_teams, menu);
+		getMenuInflater().inflate(R.menu.menu_profile, menu);
 		return true;
 	}
 
@@ -50,8 +37,24 @@ public class TeamsActivity extends ListActivity
 		int id = item.getItemId();
 
 		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings)
+		if (id == R.id.action_accept)
 		{
+			String name = ((EditText)findViewById(R.id.profile_name_edit)).getText().toString();
+			if (name.isEmpty())
+			{
+				new AlertDialog.Builder(this)
+					.setTitle("You must enter a name for this app to actually work!")
+					.setPositiveButton("OK", null)
+					.show();
+			}
+			else
+			{
+				getPreferences(Context.MODE_PRIVATE)
+					.edit()
+					.putString(getString(R.string.profile_name_key), name)
+					.commit();
+			}
+
 			return true;
 		}
 
