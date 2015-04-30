@@ -43,7 +43,7 @@ public class ProfileActivity extends Activity
 			if (name.isEmpty())
 			{
 				new AlertDialog.Builder(this)
-					.setTitle("You must enter a name for this app to actually work!")
+					.setTitle("You must enter your name for this app to actually work!")
 					.setPositiveButton("OK", null)
 					.show();
 			}
