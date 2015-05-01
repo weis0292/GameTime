@@ -10,6 +10,14 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseQueryAdapter;
+
+import java.util.List;
+
 
 public class TeamsActivity extends ListActivity
 {
@@ -20,12 +28,29 @@ public class TeamsActivity extends ListActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_teams);
 
-		SharedPreferences preferences = getSharedPreferences(getString(R.string.preferences_profile), Context.MODE_PRIVATE);
-		String name = preferences.getString(getString(R.string.profile_name_key), "");
+		String name = getProfileName();
 		if (TextUtils.isEmpty(name))
 		{
-			Intent intent = new Intent(this, ProfileActivity.class);
-			startActivity(intent);
+			navigateToProfileActivity();
+		}
+		else
+		{
+			// This code is taken from here: https://www.parse.com/docs/android_guide#ui-queryadapter
+			// It will need to move to handle the case where someone enters their name the first
+			// time entering the app.
+			//ParseQueryAdapter<ParseObject> adapter = new ParseQueryAdapter<>(this, "Team");
+			//adapter.setTextKey("teamName");
+			setListAdapter(new TeamsParseQueryAdapter(this));
+//			ParseQuery<ParseObject> query = ParseQuery.getQuery("Player");
+//			query.whereEqualTo("playerName", getProfileName());
+//			query.findInBackground(new FindCallback<ParseObject>()
+//			{
+//				@Override
+//				public void done(List<ParseObject> parseObjects, ParseException e)
+//				{
+//
+//				}
+//			})
 		}
 
 //		Intent intent = new Intent(this, TeamDetailActivity.class);
@@ -50,11 +75,25 @@ public class TeamsActivity extends ListActivity
 		int id = item.getItemId();
 
 		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings)
+		if (id == R.id.action_profile)
 		{
+			navigateToProfileActivity();
 			return true;
 		}
 
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void navigateToProfileActivity()
+	{
+		Intent intent = new Intent(this, ProfileActivity.class);
+		intent.putExtra(getString(R.string.profile_name_key), getProfileName());
+		startActivity(intent);
+	}
+
+	private String getProfileName()
+	{
+		SharedPreferences preferences = getSharedPreferences(getString(R.string.preferences_profile), Context.MODE_PRIVATE);
+		return preferences.getString(getString(R.string.profile_name_key), "");
 	}
 }

@@ -3,6 +3,7 @@ package edu.umn.fingagunz.gametime;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +18,10 @@ public class ProfileActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile);
+
+		Intent intent = getIntent();
+		String name = intent.getStringExtra(getString(R.string.profile_name_key));
+		((EditText)findViewById(R.id.profile_name_edit)).setText(name);
 	}
 
 
