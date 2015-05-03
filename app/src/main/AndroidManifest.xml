@@ -27,7 +27,27 @@
         <activity
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile"
-	        android:windowSoftInputMode="stateVisible|adjustResize">
+            android:windowSoftInputMode="stateVisible|adjustResize" >
+        </activity>
+        <activity
+            android:name=".UpcomingGamesActivity"
+            android:label="@string/title_activity_upcoming_games" >
+        </activity>
+        <activity
+            android:name=".AddEditGameActivity"
+            android:label="@string/title_activity_add_edit_game" >
+        </activity>
+        <activity
+            android:name=".AddEditTeamActivity"
+            android:label="@string/title_activity_add_edit_team" >
+        </activity>
+        <activity
+            android:name=".AddEditPlayerActivity"
+            android:label="@string/title_activity_add_edit_player" >
+        </activity>
+        <activity
+            android:name=".GameDetailActivity"
+            android:label="@string/title_activity_game_detail" >
         </activity>
     </application>
 

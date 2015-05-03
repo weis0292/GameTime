@@ -11,13 +11,15 @@
     <string name="hello_games_fragment">Hello blank games fragment</string>
     <string name="hello_players_fragment">Hello blank players fragment</string>
     <string name="title_activity_profile">Profile</string>
-
-	<string name="action_accept">Accept</string>
-	<string name="action_profile">Profile</string>
-
-	<string name="profile_name_label">Name</string>
-
-	<string name="preferences_profile">profile_preferences</string>
-	<string name="profile_name_key">profile_name</string>
+    <string name="action_accept">Accept</string>
+    <string name="action_profile">Profile</string>
+    <string name="profile_name_label">Name</string>
+    <string name="preferences_profile">profile_preferences</string>
+    <string name="profile_name_key">profile_name</string>
+    <string name="title_activity_upcoming_games">UpcomingGamesActivity</string>
+    <string name="title_activity_add_edit_game">AddEditGameActivity</string>
+    <string name="title_activity_add_edit_team">AddEditTeamActivity</string>
+    <string name="title_activity_add_edit_player">AddEditPlayerActivity</string>
+    <string name="title_activity_game_detail">GameDetailActivity</string>
 
 </resources>
