@@ -38,23 +38,20 @@ public class TeamsActivity extends ListActivity
 			// This code is taken from here: https://www.parse.com/docs/android_guide#ui-queryadapter
 			// It will need to move to handle the case where someone enters their name the first
 			// time entering the app.
-			//ParseQueryAdapter<ParseObject> adapter = new ParseQueryAdapter<>(this, "Team");
-			//adapter.setTextKey("teamName");
-			setListAdapter(new TeamsParseQueryAdapter(this));
-//			ParseQuery<ParseObject> query = ParseQuery.getQuery("Player");
-//			query.whereEqualTo("playerName", getProfileName());
-//			query.findInBackground(new FindCallback<ParseObject>()
-//			{
-//				@Override
-//				public void done(List<ParseObject> parseObjects, ParseException e)
-//				{
-//
-//				}
-//			})
+			final ListActivity activity = this;
+			ParseQuery<ParseObject> query = new ParseQuery<>("Player");
+			query.whereEqualTo("playerName", getProfileName());
+			query.findInBackground(new FindCallback<ParseObject>()
+			{
+				@Override
+				public void done(List<ParseObject> list, ParseException e)
+				{
+					ParseObject first = list.get(0);
+					String playerId = first.getObjectId();
+					setListAdapter(new TeamsParseQueryAdapter(activity, playerId));
+				}
+			});
 		}
-
-//		Intent intent = new Intent(this, TeamDetailActivity.class);
-//		startActivity(intent);
 	}
 
 
