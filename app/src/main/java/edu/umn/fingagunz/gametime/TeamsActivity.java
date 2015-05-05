@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -47,13 +49,17 @@ public class TeamsActivity extends ListActivity
 				public void done(List<ParseObject> list, ParseException e)
 				{
 					ParseObject first = list.get(0);
-					String playerId = first.getObjectId();
-					setListAdapter(new TeamsParseQueryAdapter(activity, playerId));
+					setListAdapter(new TeamsParseQueryAdapter(activity, first));
 				}
 			});
 		}
 	}
 
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id)
+	{
+		super.onListItemClick(l, v, position, id);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
