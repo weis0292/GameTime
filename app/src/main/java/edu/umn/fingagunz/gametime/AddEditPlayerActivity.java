@@ -1,12 +1,12 @@
 package edu.umn.fingagunz.gametime;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class AddEditPlayerActivity extends ActionBarActivity
+public class AddEditPlayerActivity extends Activity
 {
 
 	@Override
