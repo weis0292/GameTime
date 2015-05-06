@@ -14,7 +14,7 @@ public class AttendanceCommitment extends ParseObject
 	{
 		Player player = null;
 		try { player = getParseObject("player").fetchIfNeeded(); }
-		catch (ParseException ex) { }
+		catch (ParseException e) { e.printStackTrace(); }
 		return player;
 	}
 	public void setPlayer(Player player) { put("player", player); }
@@ -23,7 +23,7 @@ public class AttendanceCommitment extends ParseObject
 	{
 		Game game = null;
 		try { game = getParseObject("game").fetchIfNeeded(); }
-		catch (ParseException ex) { }
+		catch (ParseException e) { e.printStackTrace(); }
 		return game;
 	}
 	public void setGame(Game game) { put("game", game); }

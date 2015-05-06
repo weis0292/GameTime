@@ -1,6 +1,7 @@
 package edu.umn.fingagunz.gametime;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -56,6 +57,11 @@ public class AddEditTeamActivity extends Activity
 			newTeam.setSport(sport);
 			try { newTeam.save(); }
 			catch (ParseException ex) { }
+
+			// Now navigate to the team detail page for this team
+			Intent intent = new Intent(this, TeamDetailActivity.class);
+			intent.putExtra("TeamObjectId", newTeam.getObjectId());
+			startActivity(intent);
 
 			return true;
 		}

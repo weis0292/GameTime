@@ -16,7 +16,7 @@ public class Game extends ParseObject
 	{
 		Team team = null;
 		try { team = getParseObject("team").fetchIfNeeded(); }
-		catch (ParseException ex) { }
+		catch (ParseException e) { e.printStackTrace(); }
 		return team;
 	}
 	public void setTeam(Team team) { put("team", team); }

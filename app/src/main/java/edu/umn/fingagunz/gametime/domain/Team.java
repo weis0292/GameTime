@@ -18,7 +18,7 @@ public class Team extends ParseObject {
 	{
 		Sport sport = null;
 		try { sport = getParseObject("sport").fetchIfNeeded(); }
-		catch(Exception ex) { }
+		catch(Exception e) { e.printStackTrace(); }
 		return sport;
 	}
 	public void setSport(Sport sport) { put("sport", sport); }
