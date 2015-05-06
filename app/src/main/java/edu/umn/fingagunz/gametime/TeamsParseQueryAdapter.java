@@ -43,9 +43,10 @@ public class TeamsParseQueryAdapter extends ParseQueryAdapter<ParseObject>
 		{
 			ParseObject team = object.getParseObject("team");
 			String teamName = team.fetchIfNeeded().getString("teamName");
-			//v.setTag(0, team);
 			v.setTag(team);
 			((TextView)v.findViewById(R.id.teams_row_name_label)).setText(teamName);
+			ParseObject sport = team.getParseObject("sport").fetchIfNeeded();
+			((TextView)v.findViewById(R.id.teams_row_sport_label)).setText(sport.getString("sportName"));
 		}
 		catch(ParseException ex)
 		{
