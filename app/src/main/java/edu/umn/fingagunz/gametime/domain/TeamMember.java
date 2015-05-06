@@ -1,6 +1,7 @@
 package edu.umn.fingagunz.gametime.domain;
 
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 
 /**
@@ -9,6 +10,12 @@ import com.parse.ParseObject;
 @ParseClassName("TeamMember")
 public class TeamMember extends ParseObject {
 	public Player getPlayer() {
-		return (Player)get("player");
+		try {
+			return (Player)getParseObject("player").fetchIfNeeded();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 }
