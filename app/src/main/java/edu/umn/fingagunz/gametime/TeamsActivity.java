@@ -100,6 +100,9 @@ public class TeamsActivity extends ListActivity
 			navigateToProfileActivity();
 			return true;
 		}
+		else if (id == R.id.action_add_team)
+		{
+		}
 
 		return super.onOptionsItemSelected(item);
 	}
