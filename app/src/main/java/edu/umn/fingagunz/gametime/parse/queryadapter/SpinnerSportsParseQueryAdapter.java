@@ -4,8 +4,6 @@ import android.content.Context;
 import com.parse.ParseObject;
 import com.parse.ParseQueryAdapter;
 
-import edu.umn.fingagunz.gametime.R;
-
 /**
  * Created by Mike on 5/5/2015.
  */

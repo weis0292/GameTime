@@ -6,6 +6,7 @@ import com.parse.Parse;
 import com.parse.ParseObject;
 
 import edu.umn.fingagunz.gametime.domain.Player;
+import edu.umn.fingagunz.gametime.domain.Sport;
 import edu.umn.fingagunz.gametime.domain.Team;
 import edu.umn.fingagunz.gametime.domain.TeamMember;
 
@@ -23,8 +24,9 @@ public class GameTimeApplication extends Application
 		ParseObject.registerSubclass(Team.class);
 		ParseObject.registerSubclass(TeamMember.class);
 		ParseObject.registerSubclass(Player.class);
+		ParseObject.registerSubclass(Sport.class);
 
-		Parse.enableLocalDatastore(this);
+		//Parse.enableLocalDatastore(this);
 		Parse.initialize(this, "d3YN2GzWnbqMLtFXoEobThU12JprVLqRlbnchxNX", "UOJJ0lafxi85sVjHaRQObwRZjAq9v9TDFJBK6KDE");
 	}
 }

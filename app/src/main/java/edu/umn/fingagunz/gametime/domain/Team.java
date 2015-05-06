@@ -12,5 +12,14 @@ public class Team extends ParseObject {
 	public String getTeamName() {
 		return getString("teamName");
 	}
+	public void setTeamName(String teamName) { put("teamName", teamName); }
 
+	public Sport getSport()
+	{
+		Sport sport = null;
+		try { sport = getParseObject("sport").fetchIfNeeded(); }
+		catch(Exception ex) { }
+		return sport;
+	}
+	public void setSport(Sport sport) { put("sport", sport); }
 }

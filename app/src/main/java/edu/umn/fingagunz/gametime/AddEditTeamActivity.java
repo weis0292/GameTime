@@ -4,8 +4,14 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+
+import edu.umn.fingagunz.gametime.domain.Sport;
+import edu.umn.fingagunz.gametime.domain.Team;
 import edu.umn.fingagunz.gametime.parse.queryadapter.SpinnerSportsParseQueryAdapter;
 
 
@@ -39,8 +45,18 @@ public class AddEditTeamActivity extends Activity
 		int id = item.getItemId();
 
 		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings)
+		if (id == R.id.action_accept)
 		{
+			// Get the sport Parse Object
+			Sport sport = (Sport)((Spinner)findViewById(R.id.add_edit_team_sports)).getSelectedItem();
+
+			// Here we need to save the team information.
+			Team newTeam = new Team();
+			newTeam.setTeamName(((EditText)findViewById(R.id.add_edit_team_team_name)).getText().toString());
+			newTeam.setSport(sport);
+			try { newTeam.save(); }
+			catch (ParseException ex) { }
+
 			return true;
 		}
 
