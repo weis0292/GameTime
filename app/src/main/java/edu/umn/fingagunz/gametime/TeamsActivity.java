@@ -102,6 +102,8 @@ public class TeamsActivity extends ListActivity
 		}
 		else if (id == R.id.action_add_team)
 		{
+			Intent intent = new Intent(this, AddEditTeamActivity.class);
+			startActivity(intent);
 		}
 
 		return super.onOptionsItemSelected(item);
