@@ -22,7 +22,6 @@ public class TeamsParseQueryAdapter extends ParseQueryAdapter<ParseObject>
 			@Override
 			public ParseQuery<ParseObject> create()
 			{
-				//String name = player.getString("playerName");
 				ParseQuery<ParseObject> query = ParseQuery.getQuery("TeamMember");
 				query.whereEqualTo("player", player);
 				return query;
@@ -44,6 +43,8 @@ public class TeamsParseQueryAdapter extends ParseQueryAdapter<ParseObject>
 		{
 			ParseObject team = object.getParseObject("team");
 			String teamName = team.fetchIfNeeded().getString("teamName");
+			//v.setTag(0, team);
+			v.setTag(team);
 			((TextView)v.findViewById(R.id.teams_row_name_label)).setText(teamName);
 		}
 		catch(ParseException ex)

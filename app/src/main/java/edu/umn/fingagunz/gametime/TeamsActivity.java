@@ -23,6 +23,7 @@ import java.util.List;
 
 public class TeamsActivity extends ListActivity
 {
+	private TeamsParseQueryAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -49,7 +50,8 @@ public class TeamsActivity extends ListActivity
 				public void done(List<ParseObject> list, ParseException e)
 				{
 					ParseObject first = list.get(0);
-					setListAdapter(new TeamsParseQueryAdapter(activity, first));
+					adapter = new TeamsParseQueryAdapter(activity, first);
+					setListAdapter(adapter);
 				}
 			});
 		}
@@ -59,6 +61,21 @@ public class TeamsActivity extends ListActivity
 	protected void onListItemClick(ListView l, View v, int position, long id)
 	{
 		super.onListItemClick(l, v, position, id);
+
+		ParseObject team = (ParseObject)v.getTag();
+		Intent intent = new Intent(this, TeamDetailActivity.class);
+		intent.putExtra("TeamObjectId", team.getObjectId());
+		startActivity(intent);
+//		ParseQuery<ParseObject> whatever = new ParseQuery<>("Team");
+//		whatever.whereEqualTo("objectId", team.getObjectId());
+//		try
+//		{
+//			List<ParseObject> sldkfj = whatever.find();
+//			ParseObject sdlfkj = sldkfj.get(0);
+//		}
+//		catch (ParseException ex)
+//		{
+//		}
 	}
 
 	@Override
