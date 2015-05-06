@@ -1,12 +1,24 @@
 package edu.umn.fingagunz.gametime;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.ListFragment;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.umn.fingagunz.gametime.domain.Player;
+import edu.umn.fingagunz.gametime.domain.Team;
+import edu.umn.fingagunz.gametime.domain.TeamMember;
+import edu.umn.fingagunz.gametime.listadapter.PlayerListAdapter;
 
 
 /**
@@ -17,8 +29,7 @@ import android.view.ViewGroup;
  * Use the {@link TeamDetailPlayersFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TeamDetailPlayersFragment extends Fragment
-{
+public class TeamDetailPlayersFragment extends ListFragment {
 	// TODO: Rename parameter arguments, choose names that match
 	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 	private static final String ARG_PARAM1 = "param1";
@@ -39,8 +50,7 @@ public class TeamDetailPlayersFragment extends Fragment
 	 * @return A new instance of fragment TeamDetailPlayersFragment.
 	 */
 	// TODO: Rename and change types and number of parameters
-	public static TeamDetailPlayersFragment newInstance(String param1, String param2)
-	{
+	public static TeamDetailPlayersFragment newInstance(String param1, String param2) {
 		TeamDetailPlayersFragment fragment = new TeamDetailPlayersFragment();
 		Bundle args = new Bundle();
 		args.putString(ARG_PARAM1, param1);
@@ -49,57 +59,72 @@ public class TeamDetailPlayersFragment extends Fragment
 		return fragment;
 	}
 
-	public TeamDetailPlayersFragment()
-	{
+	public TeamDetailPlayersFragment() {
 		// Required empty public constructor
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if (getArguments() != null)
-		{
+		if (getArguments() != null) {
 			mParam1 = getArguments().getString(ARG_PARAM1);
 			mParam2 = getArguments().getString(ARG_PARAM2);
 		}
+
+		Activity activity = getActivity();
+		if (activity instanceof TeamDetailActivity) {
+			Team team = ((TeamDetailActivity) activity).getSelectedTeam();
+
+			ParseQuery<TeamMember> teamMemberQuery = ParseQuery.getQuery(TeamMember.class);
+			List<TeamMember> teamMembers = null;
+			try {
+				teamMembers = teamMemberQuery.whereEqualTo("team", team).find();
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+
+			if (teamMembers != null && teamMembers.size() > 0) {
+				ArrayList<Player> players = new ArrayList<Player>();
+
+				for (TeamMember member : teamMembers) {
+					players.add(member.getPlayer());
+				}
+
+				PlayerListAdapter adapter = new PlayerListAdapter(getActivity(), R.layout.fragment_team_detail_players_row, players.toArray(new Player[players.size()]));
+				setListAdapter(adapter);
+			}
+		}
+
 	}
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	                         Bundle savedInstanceState)
-	{
+							 Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		return inflater.inflate(R.layout.fragment_team_detail_players, container, false);
 	}
 
 	// TODO: Rename method, update argument and hook method into UI event
-	public void onButtonPressed(Uri uri)
-	{
-		if (mListener != null)
-		{
+	public void onButtonPressed(Uri uri) {
+		if (mListener != null) {
 			mListener.onFragmentInteraction(uri);
 		}
 	}
 
 	@Override
-	public void onAttach(Activity activity)
-	{
+	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		try
-		{
+		try {
 			mListener = (OnFragmentInteractionListener) activity;
-		}
-		catch (ClassCastException e)
-		{
+		} catch (ClassCastException e) {
 			throw new ClassCastException(activity.toString()
-				+ " must implement OnFragmentInteractionListener");
+					+ " must implement OnFragmentInteractionListener");
 		}
 	}
 
 	@Override
-	public void onDetach()
-	{
+	public void onDetach() {
 		super.onDetach();
 		mListener = null;
 	}

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<TextView
 	xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/team_detail_players_row_name"
 	android:orientation="vertical"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent">
+	android:layout_height="match_parent"/>
 
-</LinearLayout>

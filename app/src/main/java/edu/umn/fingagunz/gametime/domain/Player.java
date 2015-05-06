@@ -1,6 +1,7 @@
 package edu.umn.fingagunz.gametime.domain;
 
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 
 /**

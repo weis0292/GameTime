@@ -25,6 +25,16 @@ public class TeamDetailActivity
 		extends Activity
 		implements OnFragmentInteractionListener {
 
+	private Team selectedTeam;
+
+	public void setSelectedTeam(Team team) {
+		this.selectedTeam = team;
+	}
+
+	public Team getSelectedTeam() {
+		return selectedTeam;
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,20 +69,22 @@ public class TeamDetailActivity
 			e.printStackTrace();
 		}
 
-		ParseQuery<TeamMember> teamMemberQuery = ParseQuery.getQuery(TeamMember.class);
-		List<TeamMember> teamMembers = null;
-		try {
-			teamMembers = teamMemberQuery.whereEqualTo("team",team).find();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		setSelectedTeam(team);
 
-		if(teamMembers != null && teamMembers.size() > 0) {
-			for(TeamMember member : teamMembers) {
-				member.getPlayer().getName();
-			}
-		}
-		team.getTeamName();
+//		ParseQuery<TeamMember> teamMemberQuery = ParseQuery.getQuery(TeamMember.class);
+//		List<TeamMember> teamMembers = null;
+//		try {
+//			teamMembers = teamMemberQuery.whereEqualTo("team",team).find();
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//
+//		if(teamMembers != null && teamMembers.size() > 0) {
+//			for(TeamMember member : teamMembers) {
+//				member.getPlayer().getName();
+//			}
+//		}
+//		team.getTeamName();
 	}
 
 
