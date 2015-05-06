@@ -10,23 +10,24 @@ import com.parse.ParseObject;
 @ParseClassName("AttendanceCommitment")
 public class AttendanceCommitment extends ParseObject
 {
-//	public Player getPlayer()
-//	{
-//		Player player = null;
-//		try { player = getParseObject("player").fetchIfNeeded(); }
-//		catch (ParseException ex) { }
-//		return player;
-//	}
-//	public void setPlayer(Player player) { put("player", player); }
-//
-//	public Game getGame()
-//	{
-//		Game game = null;
-//		try { game = getParseObject("game").fetchIfNeeded(); }
-//		catch (ParseException ex) { }
-//		return game;
-//	}
-//	public void setGame(Game game) { put("game", game); }
-//
-//	public
+	public Player getPlayer()
+	{
+		Player player = null;
+		try { player = getParseObject("player").fetchIfNeeded(); }
+		catch (ParseException ex) { }
+		return player;
+	}
+	public void setPlayer(Player player) { put("player", player); }
+
+	public Game getGame()
+	{
+		Game game = null;
+		try { game = getParseObject("game").fetchIfNeeded(); }
+		catch (ParseException ex) { }
+		return game;
+	}
+	public void setGame(Game game) { put("game", game); }
+
+	public String getRSVPCode() { return getString("rsvpCode"); }
+	public void setRSVPCode(String rsvpCode) { put("rsvpCode", rsvpCode); }
 }
