@@ -17,6 +17,7 @@ import com.parse.ParseQuery;
 import java.util.List;
 
 import edu.umn.fingagunz.gametime.domain.Team;
+import edu.umn.fingagunz.gametime.domain.TeamMember;
 import edu.umn.fingagunz.gametime.parse.queryadapter.TeamsParseQueryAdapter;
 
 
@@ -50,16 +51,27 @@ public class TeamDetailActivity
 		Intent intent = getIntent();
 		String teamObjectId = intent.getStringExtra("TeamObjectId");
 
-		ParseQuery<ParseObject> query = ParseQuery.getQuery(Team.PARSE_OBJECT_NAME);
-		ParseObject parseObject = null;
+		ParseQuery<Team> teamQuery = ParseQuery.getQuery(Team.class);
+		Team team = null;
 		try {
-			 parseObject = query.get(teamObjectId);
+			 team = teamQuery.get(teamObjectId);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 
-		Team team = new Team(parseObject);
+		ParseQuery<TeamMember> teamMemberQuery = ParseQuery.getQuery(TeamMember.class);
+		List<TeamMember> teamMembers = null;
+		try {
+			teamMembers = teamMemberQuery.whereEqualTo("team",team).find();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 
+		if(teamMembers != null && teamMembers.size() > 0) {
+			for(TeamMember member : teamMembers) {
+				member.getPlayer().getName();
+			}
+		}
 		team.getTeamName();
 	}
 
