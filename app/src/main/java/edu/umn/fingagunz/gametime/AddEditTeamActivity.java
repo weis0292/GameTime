@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Spinner;
+
+import edu.umn.fingagunz.gametime.parse.queryadapter.SpinnerSportsParseQueryAdapter;
 
 
 public class AddEditTeamActivity extends Activity
@@ -14,6 +17,8 @@ public class AddEditTeamActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_edit_team);
+
+		((Spinner)findViewById(R.id.add_edit_team_sports)).setAdapter(new SpinnerSportsParseQueryAdapter(this));
 	}
 
 
