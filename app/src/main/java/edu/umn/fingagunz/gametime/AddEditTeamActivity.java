@@ -10,8 +10,10 @@ import android.widget.Spinner;
 
 import com.parse.ParseException;
 
+import edu.umn.fingagunz.gametime.domain.Player;
 import edu.umn.fingagunz.gametime.domain.Sport;
 import edu.umn.fingagunz.gametime.domain.Team;
+import edu.umn.fingagunz.gametime.domain.TeamMember;
 import edu.umn.fingagunz.gametime.parse.queryadapter.SpinnerSportsParseQueryAdapter;
 
 
@@ -56,6 +58,22 @@ public class AddEditTeamActivity extends Activity
 			newTeam.setSport(sport);
 			try { newTeam.save(); }
 			catch (ParseException ex) { }
+
+
+            Intent playerIdIntent = getIntent();
+            String playerId = playerIdIntent.getStringExtra("playerId");
+            Player player = new Player();
+            player.setObjectId(playerId);
+            try { player.fetchIfNeeded(); }
+            catch (ParseException e) { e.printStackTrace(); }
+
+            TeamMember newTeamMember = new TeamMember();
+            newTeamMember.setPlayer(player);
+            newTeamMember.setIsCaptain(true);
+            newTeamMember.setTeam(newTeam);
+
+            try { newTeamMember.save(); }
+            catch (ParseException ex){}
 
 			// Now navigate to the team detail page for this team
 			Intent intent = new Intent(this, TeamDetailActivity.class);

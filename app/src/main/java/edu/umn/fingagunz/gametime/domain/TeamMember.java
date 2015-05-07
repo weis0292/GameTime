@@ -18,4 +18,13 @@ public class TeamMember extends ParseObject {
 
 		return null;
 	}
+    public void setPlayer(Player player){
+        put("player", player);
+    }
+    public void setIsCaptain(boolean isCaptain){
+        put("isCaptain", isCaptain);
+    }
+    public void setTeam(Team team){
+        put("team", team);
+    }
 }
