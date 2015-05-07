@@ -15,11 +15,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import edu.umn.fingagunz.gametime.domain.Game;
+import edu.umn.fingagunz.gametime.domain.Team;
 
 
 public class AddEditGameActivity extends Activity implements OnDatePickerDialogDismissedListener, OnTimePickerDialogDismissedListener
 {
 	private Game game = new Game();
+	private Team team = new Team();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -28,9 +30,15 @@ public class AddEditGameActivity extends Activity implements OnDatePickerDialogD
 		setContentView(R.layout.activity_add_edit_game);
 
 		Intent intent = getIntent();
-		if (intent.hasExtra("gameId"))
+
+		String teamId = intent.getStringExtra("TeamObjectId");
+		team.setObjectId(teamId);
+		try { team.fetchIfNeeded(); }
+		catch (ParseException e) { e.printStackTrace(); }
+
+		if (intent.hasExtra("GameObjectId"))
 		{
-			String gameId = intent.getStringExtra("gameId");
+			String gameId = intent.getStringExtra("GameObjectId");
 			game.setObjectId(gameId);
 			try { game.fetchIfNeeded(); }
 			catch (ParseException e) { e.printStackTrace(); }
