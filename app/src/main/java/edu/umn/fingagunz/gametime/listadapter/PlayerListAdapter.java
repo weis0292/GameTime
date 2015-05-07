@@ -53,7 +53,11 @@ public class PlayerListAdapter extends ArrayAdapter<Player> {
 
 		Player player = data[position];
 		holder.playerName.setText(player.getName());
-		switch (player.getGender())
+
+		String gender = player.getGender();
+		gender = (gender == null) ? "?" : gender;
+
+		switch (gender)
 		{
 			case "M":
 				holder.genderImage.setImageResource(R.mipmap.ic_gender_male_black_24dp);
