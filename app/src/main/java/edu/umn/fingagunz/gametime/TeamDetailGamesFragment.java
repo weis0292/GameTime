@@ -40,7 +40,7 @@ public class TeamDetailGamesFragment extends ListFragment {
 
 	private OnFragmentInteractionListener mListener;
 
-    String currentUserId = "";
+	String currentUserId = "";
 
 	public TeamDetailGamesFragment() {
 		// Required empty public constructor
@@ -118,8 +118,8 @@ public class TeamDetailGamesFragment extends ListFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.team_detail_menu_add_game) {
 
-            // leaving this here in case it breaks something....
-            //  if not, this can be deleted...
+			// leaving this here in case it breaks something....
+			//  if not, this can be deleted...
 
 			Activity activity = getActivity();
 			Intent intent = new Intent(activity, AddEditGameActivity.class);
@@ -153,9 +153,4 @@ public class TeamDetailGamesFragment extends ListFragment {
 		startActivity(intent);
 	}
 
-	/*
-
-
-
- */
 }
