@@ -29,12 +29,6 @@ public class TeamsActivity extends ListActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_teams);
 
-
-        //TODO  remove this once the plus sign button is working..
-		Intent intent = new Intent(this, AddEditGameActivity.class);
-		startActivity(intent);
-
-
 		String name = getProfileName();
 		if (TextUtils.isEmpty(name))
 		{

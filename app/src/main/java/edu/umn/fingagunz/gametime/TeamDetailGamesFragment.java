@@ -3,9 +3,13 @@ package edu.umn.fingagunz.gametime;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.ListFragment;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
@@ -73,6 +77,8 @@ public class TeamDetailGamesFragment extends ListFragment {
 
 		ListAdapter adapter = new TeamGamesParseQueryAdapter(activity, team);
 		setListAdapter(adapter);
+
+		setHasOptionsMenu(true);
 	}
 
 	@Override
@@ -112,5 +118,23 @@ public class TeamDetailGamesFragment extends ListFragment {
 	{
 		super.onDetach();
 		mListener = null;
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.menu_team_detail_games, menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.team_detail_menu_add_game) {
+			Activity activity = getActivity();
+			Intent intent = new Intent(activity, AddEditGameActivity.class);
+			intent.putExtra("TeamObjectId", ((TeamDetailActivity) activity).getSelectedTeam().getObjectId());
+			startActivity(intent);
+		}
+
+		return false; // http://developer.android.com/reference/android/app/Fragment.html#onOptionsItemSelected(android.view.MenuItem)
 	}
 }
