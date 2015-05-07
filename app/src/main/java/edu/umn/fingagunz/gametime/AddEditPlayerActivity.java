@@ -45,7 +45,7 @@ public class AddEditPlayerActivity extends Activity
 		int id = item.getItemId();
 
 		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings)
+		if (id == R.id.action_accept)
 		{
             Player newPlayer = new Player();
             newPlayer.setName(((EditText)findViewById(R.id.add_edit_player_name)).getText().toString());
