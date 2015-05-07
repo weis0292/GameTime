@@ -31,7 +31,7 @@ public class TeamsActivity extends ListActivity
 
 
         //TODO  remove this once the plus sign button is working..
-		Intent intent = new Intent(this, AddEditPlayerActivity.class);
+		Intent intent = new Intent(this, AddEditGameActivity.class);
 		startActivity(intent);
 
 
