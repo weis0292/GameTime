@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/team_detail_menu_add_player"
+        android:icon="@mipmap/ic_plus_black_24dp"
+        android:title="Add Player"
+        android:showAsAction="always"/>
+</menu>
