@@ -21,7 +21,7 @@
     <string name="title_activity_upcoming_games">Upcoming Games</string>
     <string name="title_activity_add_edit_game">AddEditGameActivity</string>
     <string name="title_activity_add_edit_team">AddEditTeamActivity</string>
-    <string name="title_activity_add_edit_player">AddEditPlayerActivity</string>
+    <string name="title_activity_add_edit_player">Add/Edit Player</string>
     <string name="title_activity_game_detail">GameDetailActivity</string>
 
 </resources>
