@@ -82,7 +82,7 @@
 			android:layout_height="wrap_content"
 			android:padding="16dp"
 			android:clickable="true"
-			android:src="@mipmap/ic_thumb_down_grey600_24dp"/>
+			android:src="@mipmap/ic_thumb_down_grey600_36dp"/>
 
 		<ImageView
 			android:id="@+id/game_detail_maybe_icon"
@@ -90,7 +90,7 @@
 			android:layout_height="wrap_content"
 			android:padding="16dp"
 			android:clickable="true"
-			android:src="@mipmap/ic_thumbs_up_down_grey600_24dp"/>
+			android:src="@mipmap/ic_thumbs_up_down_grey600_36dp"/>
 
 		<ImageView
 			android:id="@+id/game_detail_decline_icon"
@@ -98,7 +98,7 @@
 			android:layout_height="wrap_content"
 			android:padding="16dp"
 			android:clickable="true"
-			android:src="@mipmap/ic_thumb_up_grey600_24dp"/>
+			android:src="@mipmap/ic_thumb_up_grey600_36dp"/>
 
 	</LinearLayout>
 
