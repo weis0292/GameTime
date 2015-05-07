@@ -77,8 +77,7 @@ public class PlayerGamesParseQueryAdapter extends ParseQueryAdapter<Game>
                     break;
 
                 case "Maybe":
-//                    ((ImageView) v.findViewById(R.id.game_attendance_commitment)).setImageResource(R.mipmap.ic_thumbs_up_down_black_24dp);
-                    ((ImageView) v.findViewById(R.id.game_attendance_commitment)).setImageResource(R.mipmap.ic_thumbs_up_down_grey600_24dp);
+                    ((ImageView) v.findViewById(R.id.game_attendance_commitment)).setImageResource(R.mipmap.ic_thumbs_up_down_black_24dp);
                     break;
             }
         }
