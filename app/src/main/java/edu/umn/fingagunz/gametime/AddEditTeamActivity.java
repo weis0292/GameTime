@@ -26,7 +26,7 @@ public class AddEditTeamActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_edit_team);
 
-        ((Spinner)findViewById(R.id.add_edit_player_gender)).setAdapter(new SpinnerSportsParseQueryAdapter(this));
+        ((Spinner)findViewById(R.id.add_edit_team_sports)).setAdapter(new SpinnerSportsParseQueryAdapter(this));
     }
 
 
