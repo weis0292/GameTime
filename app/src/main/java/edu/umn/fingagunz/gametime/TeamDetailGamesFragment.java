@@ -1,12 +1,17 @@
 package edu.umn.fingagunz.gametime;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.ListFragment;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListAdapter;
+
+import edu.umn.fingagunz.gametime.domain.Team;
+import edu.umn.fingagunz.gametime.parse.queryadapter.TeamGamesParseQueryAdapter;
 
 
 /**
@@ -17,8 +22,7 @@ import android.view.ViewGroup;
  * Use the {@link TeamDetailGamesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TeamDetailGamesFragment extends Fragment
-{
+public class TeamDetailGamesFragment extends ListFragment {
 	// TODO: Rename parameter arguments, choose names that match
 	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 	private static final String ARG_PARAM1 = "param1";
@@ -63,6 +67,12 @@ public class TeamDetailGamesFragment extends Fragment
 			mParam1 = getArguments().getString(ARG_PARAM1);
 			mParam2 = getArguments().getString(ARG_PARAM2);
 		}
+
+		Activity activity = getActivity();
+		Team team = ((TeamDetailActivity) activity).getSelectedTeam();
+
+		ListAdapter adapter = new TeamGamesParseQueryAdapter(activity, team);
+		setListAdapter(adapter);
 	}
 
 	@Override
