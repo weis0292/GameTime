@@ -29,12 +29,6 @@ public class TeamsActivity extends ListActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_teams);
 
-
-        //TODO  remove this once the plus sign button is working..
-		Intent intent = new Intent(this, AddEditPlayerActivity.class);
-		startActivity(intent);
-
-
 		String name = getProfileName();
 		if (TextUtils.isEmpty(name))
 		{
@@ -71,10 +65,20 @@ public class TeamsActivity extends ListActivity
 	{
 		super.onListItemClick(l, v, position, id);
 
+        /*
+		TODO  this is the correct code.  Once the plus sign button is working, this can be enabled.
+
 		ParseObject team = (ParseObject)v.getTag();
 		Intent intent = new Intent(this, TeamDetailActivity.class);
 		intent.putExtra("TeamObjectId", team.getObjectId());
 		startActivity(intent);
+        */
+
+        //TODO  remove this once the plus sign button is working..
+        ParseObject team = (ParseObject)v.getTag();
+        Intent intent = new Intent(this, AddEditPlayerActivity.class);
+        intent.putExtra("TeamObjectId", team.getObjectId());
+        startActivity(intent);
 	}
 
 	@Override
