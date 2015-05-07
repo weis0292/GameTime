@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Spinner;
+
+import edu.umn.fingagunz.gametime.parse.queryadapter.SpinnerSportsParseQueryAdapter;
 
 
 public class AddEditPlayerActivity extends Activity
@@ -14,7 +17,7 @@ public class AddEditPlayerActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_edit_player);
-	}
+    }
 
 
 	@Override
