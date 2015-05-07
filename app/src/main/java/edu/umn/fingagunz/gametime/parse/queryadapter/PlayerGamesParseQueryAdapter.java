@@ -81,6 +81,9 @@ public class PlayerGamesParseQueryAdapter extends ParseQueryAdapter<Game>
                     break;
             }
         }
+        else{
+            ((ImageView) v.findViewById(R.id.game_attendance_commitment)).setImageResource(R.mipmap.ic_thumbs_up_down_grey600_24dp);
+        }
 
 		((TextView)v.findViewById(R.id.game_location_description_label)).setText(game.getLocationDescription());
 		//((TextView)v.findViewById(R.id.game_dateTime_label)).setText(game.getGameDate().toString());
