@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
+import java.util.List;
+
 import edu.umn.fingagunz.gametime.domain.AttendanceCommitment;
 import edu.umn.fingagunz.gametime.domain.Game;
 import edu.umn.fingagunz.gametime.domain.Player;
@@ -62,11 +64,25 @@ public class GameDetailActivity extends Activity {
 		Player player = new Player();
 		player.setObjectId(playerId);
 
-		ParseQuery<AttendanceCommitment> query = new ParseQuery<>(AttendanceCommitment.class);
-		query.whereEqualTo("game", game);
-		query.whereEqualTo("player", player);
 		try {
+			player.fetchIfNeededInBackground();
+			ParseQuery<AttendanceCommitment> query = new ParseQuery<>(AttendanceCommitment.class);
+			query.whereEqualTo("game", game);
+			query.whereEqualTo("player", player);
 			attendanceCommitment = query.getFirst();
+//			List<AttendanceCommitment> commitments = query.find();
+//			if (commitments.size() > 0)
+//			{
+//				attendanceCommitment = commitments.get(0);
+//			}
+//			else
+//			{
+//				attendanceCommitment = new AttendanceCommitment();
+//				attendanceCommitment.setPlayer(player);
+//				attendanceCommitment.setGame(game);
+//				attendanceCommitment.setRSVPCode("Maybe");
+//				attendanceCommitment.saveInBackground();
+//			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
