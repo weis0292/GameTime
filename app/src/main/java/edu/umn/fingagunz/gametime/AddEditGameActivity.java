@@ -26,6 +26,7 @@ import edu.umn.fingagunz.gametime.domain.TeamMember;
 public class AddEditGameActivity extends Activity implements OnDatePickerDialogDismissedListener, OnTimePickerDialogDismissedListener
 {
 	private Game game = new Game();
+	private Boolean isEditingGame = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -42,6 +43,7 @@ public class AddEditGameActivity extends Activity implements OnDatePickerDialogD
 
 		if (intent.hasExtra("GameObjectId"))
 		{
+			isEditingGame = true;
 			String gameId = intent.getStringExtra("GameObjectId");
 			game.setObjectId(gameId);
 			try { game.fetchIfNeeded(); }
@@ -90,16 +92,19 @@ public class AddEditGameActivity extends Activity implements OnDatePickerDialogD
 				{
 					game.save();
 
-					ParseQuery<TeamMember> teamMembersQuery = new ParseQuery<>(TeamMember.class);
-					teamMembersQuery.whereEqualTo("team", game.getTeam());
-					List<TeamMember> teamMembers = teamMembersQuery.find();
-					for(TeamMember teamMember : teamMembers)
+					if (!isEditingGame)
 					{
-						AttendanceCommitment commitment = new AttendanceCommitment();
-						commitment.setGame(game);
-						commitment.setPlayer(teamMember.getPlayer());
-						commitment.setRSVPCode("Maybe");
-						commitment.saveInBackground();
+						ParseQuery<TeamMember> teamMembersQuery = new ParseQuery<>(TeamMember.class);
+						teamMembersQuery.whereEqualTo("team", game.getTeam());
+						List<TeamMember> teamMembers = teamMembersQuery.find();
+						for (TeamMember teamMember : teamMembers)
+						{
+							AttendanceCommitment commitment = new AttendanceCommitment();
+							commitment.setGame(game);
+							commitment.setPlayer(teamMember.getPlayer());
+							commitment.setRSVPCode("Maybe");
+							commitment.saveInBackground();
+						}
 					}
 				}
 				catch (ParseException e)
