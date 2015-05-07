@@ -43,21 +43,13 @@ public class PlayerGamesParseQueryAdapter extends ParseQueryAdapter<Game>
 	{
 		if (v == null)
 		{
-			v = View.inflate(getContext(), R.layout.activity_teams_row, null);
+			v = View.inflate(getContext(), R.layout.activity_upcoming_games_row, null);
 		}
 
 		super.getItemView(game, v, parent);
 
-//		try
-//		{
-//			ParseObject team = object.getParseObject("team");
-//			String teamName = team.fetchIfNeeded().getString("teamName");
-//			((TextView)v.findViewById(R.id.teams_row_name_label)).setText(teamName);
-//		}
-//		catch(ParseException ex)
-//		{
-//			// I have absolutely no idea what to do here?!?!?!
-//		}
+		v.setTag(game);
+		((TextView)v.findViewById(R.id.upcoming_game_description_label)).setText(game.getLocationDescription());
 
 		return v;
 	}

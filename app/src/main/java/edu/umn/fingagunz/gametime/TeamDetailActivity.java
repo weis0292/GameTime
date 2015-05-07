@@ -18,7 +18,7 @@ import java.util.List;
 
 import edu.umn.fingagunz.gametime.domain.Team;
 import edu.umn.fingagunz.gametime.domain.TeamMember;
-import edu.umn.fingagunz.gametime.parse.queryadapter.TeamsParseQueryAdapter;
+//import edu.umn.fingagunz.gametime.parse.queryadapter.TeamsParseQueryAdapter;
 
 
 public class TeamDetailActivity
