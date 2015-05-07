@@ -49,6 +49,10 @@
             android:name=".GameDetailActivity"
             android:label="@string/title_activity_game_detail" >
         </activity>
+        <activity
+            android:name=".AddExistingPlayerActivity"
+            android:label="@string/title_activity_add_existing_player" >
+        </activity>
     </application>
 
 </manifest>

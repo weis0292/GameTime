@@ -1,8 +1,10 @@
 package edu.umn.fingagunz.gametime;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ListFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -28,7 +30,7 @@ import edu.umn.fingagunz.gametime.listadapter.PlayerListAdapter;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link TeamDetailPlayersFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link TeamDetailPlayersFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -143,10 +145,41 @@ public class TeamDetailPlayersFragment extends ListFragment {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.team_detail_menu_add_player) {
-			Activity activity = getActivity();
-			Intent intent = new Intent(activity, AddEditPlayerActivity.class);
-			intent.putExtra("TeamObjectId", ((TeamDetailActivity) activity).getSelectedTeam().getObjectId());
-			startActivity(intent);
+
+
+
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+            dialogBuilder.setTitle("Add a New GameTime Player...");
+            dialogBuilder.setPositiveButton
+                    (
+                            "Select Existing Player",
+                            new DialogInterface.OnClickListener()
+                            {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which)
+                                {
+                                    Activity activity = getActivity();
+                                    Intent intent = new Intent(activity, AddExistingPlayerActivity.class);
+                                    intent.putExtra("TeamObjectId", ((TeamDetailActivity) activity).getSelectedTeam().getObjectId());
+                                    startActivity(intent);
+                                }
+                            }
+                    );
+            dialogBuilder.setNegativeButton("Create New Player",
+                    new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            Activity activity = getActivity();
+                            Intent intent = new Intent(activity, AddEditPlayerActivity.class);
+                            intent.putExtra("TeamObjectId", ((TeamDetailActivity) activity).getSelectedTeam().getObjectId());
+                            startActivity(intent);
+                        }
+                    });
+            dialogBuilder.show();
+
+
 		}
 
 		return false; // http://developer.android.com/reference/android/app/Fragment.html#onOptionsItemSelected(android.view.MenuItem)

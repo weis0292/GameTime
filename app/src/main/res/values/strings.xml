@@ -24,5 +24,6 @@
     <string name="title_activity_add_edit_team">Add/Edit Team</string>
     <string name="title_activity_add_edit_player">Add/Edit Player</string>
     <string name="title_activity_game_detail">GameDetailActivity</string>
+    <string name="title_activity_add_existing_player">AddExistingPlayerActivity</string>
 
 </resources>

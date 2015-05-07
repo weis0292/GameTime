@@ -100,7 +100,6 @@ public class AddEditPlayerActivity extends Activity
             } catch (ParseException ex) {
             }
 
-            // Now navigate to the team detail page for this team
             setResult(RESULT_OK);
             finish();
         }
