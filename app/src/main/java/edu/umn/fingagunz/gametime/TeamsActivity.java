@@ -29,7 +29,7 @@ public class TeamsActivity extends ListActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_teams);
 
-		Intent intent = new Intent(this, AddEditPlayerActivity.class);
+		Intent intent = new Intent(this, AddEditGameActivity.class);
 		startActivity(intent);
 
 		String name = getProfileName();
