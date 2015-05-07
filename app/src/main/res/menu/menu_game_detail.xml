@@ -1,1 +1,9 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"/>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<item
+		android:id="@+id/action_edit"
+		android:title="@string/action_edit"
+		android:showAsAction="always"
+		android:icon="@mipmap/ic_border_color_black_24dp"/>
+
+</menu>

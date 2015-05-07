@@ -12,6 +12,7 @@
     <string name="hello_players_fragment">Hello blank players fragment</string>
     <string name="title_activity_profile">Profile</string>
     <string name="action_accept">Accept</string>
+	<string name="action_edit">Edit</string>
     <string name="action_profile">Profile</string>
 	<string name="action_add_team">Add Team</string>
     <string name="profile_name_label">Name</string>
