@@ -22,6 +22,8 @@ public class Player extends ParseObject {
 		return getString("playerEmail");
 	}
 
+	public String getGender() { return getString("playerGender"); }
+
     public void setName(String name) { put("playerName", name); }
     public void setPhone(String phone) { put("playerPhone", phone); }
     public void setAddress(String address) { put("playerAddress", address); }

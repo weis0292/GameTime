@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -42,7 +43,8 @@ public class PlayerListAdapter extends ArrayAdapter<Player> {
 			row = inflater.inflate(layoutResourceId, parent, false);
 
 			holder = new PlayerHolder();
-			holder.playerName = (TextView)row.findViewById(R.id.team_detail_players_row_name);
+			holder.playerName = (TextView)row.findViewById(R.id.player_row_player_name);
+			holder.genderImage = (ImageView)row.findViewById(R.id.player_row_gender_icon);
 
 			row.setTag(holder);
 		} else {
@@ -51,11 +53,22 @@ public class PlayerListAdapter extends ArrayAdapter<Player> {
 
 		Player player = data[position];
 		holder.playerName.setText(player.getName());
+		switch (player.getGender())
+		{
+			case "M":
+				holder.genderImage.setImageResource(R.mipmap.ic_gender_male_black_24dp);
+				break;
+
+			case "F":
+				holder.genderImage.setImageResource(R.mipmap.ic_gender_female_black_24dp);
+				break;
+		}
 
 		return row;
 	}
 
 	static class PlayerHolder {
 		TextView playerName;
+		ImageView genderImage;
 	}
 }
