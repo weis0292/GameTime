@@ -19,6 +19,8 @@ import edu.umn.fingagunz.gametime.parse.queryadapter.PlayerGamesParseQueryAdapte
 public class UpcomingGamesActivity extends ListActivity
 {
 
+    String currentUserId = "";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -26,10 +28,10 @@ public class UpcomingGamesActivity extends ListActivity
 		setContentView(R.layout.activity_upcoming_games);
 
 		Intent intent = getIntent();
-		String playerId = intent.getStringExtra("playerId");
+        currentUserId = intent.getStringExtra("playerId");
 
 		Player player = new Player();
-		player.setObjectId(playerId);
+		player.setObjectId(currentUserId);
 		try { player.fetchIfNeeded(); }
 		catch (ParseException e) { e.printStackTrace(); }
 		ListAdapter adapter = new PlayerGamesParseQueryAdapter(this, player);
@@ -59,6 +61,7 @@ public class UpcomingGamesActivity extends ListActivity
 		Game game = (Game)v.getTag();
 		Intent intent = new Intent(this, GameDetailActivity.class);
 		intent.putExtra("gameId", game.getObjectId());
+		intent.putExtra("currentUserId", currentUserId);
 		startActivity(intent);
 	}
 }

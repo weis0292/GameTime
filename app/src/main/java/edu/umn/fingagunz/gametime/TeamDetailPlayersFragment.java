@@ -146,8 +146,6 @@ public class TeamDetailPlayersFragment extends ListFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.team_detail_menu_add_player) {
 
-
-
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
             dialogBuilder.setTitle("Add a New GameTime Player...");
             dialogBuilder.setPositiveButton

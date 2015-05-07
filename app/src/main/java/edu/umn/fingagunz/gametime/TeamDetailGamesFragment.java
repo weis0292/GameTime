@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import edu.umn.fingagunz.gametime.domain.Game;
 import edu.umn.fingagunz.gametime.domain.Team;
 import edu.umn.fingagunz.gametime.parse.queryadapter.TeamGamesParseQueryAdapter;
 
@@ -20,7 +21,7 @@ import edu.umn.fingagunz.gametime.parse.queryadapter.TeamGamesParseQueryAdapter;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link TeamDetailGamesFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link TeamDetailGamesFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -37,6 +38,7 @@ public class TeamDetailGamesFragment extends ListFragment {
 
 	private OnFragmentInteractionListener mListener;
 
+    String currentUserId = "";
 
 	public TeamDetailGamesFragment() {
 		// Required empty public constructor
@@ -113,10 +115,26 @@ public class TeamDetailGamesFragment extends ListFragment {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.team_detail_menu_add_game) {
+
+            /*
+
+            TODO
+
+            // leaving this here in case it breaks something....
+            //  if not, this can be deleted...
+
 			Activity activity = getActivity();
 			Intent intent = new Intent(activity, AddEditGameActivity.class);
 			intent.putExtra("TeamObjectId", ((TeamDetailActivity) activity).getSelectedTeam().getObjectId());
 			startActivity(intent);
+            */
+
+            Activity activity = getActivity();
+            Intent intent = new Intent(activity, GameDetailActivity.class);
+            intent.putExtra("gameId", ((TeamDetailActivity) activity).getSelectedTeam().getObjectId());
+            intent.putExtra("playerId", currentUserId);
+            startActivity(intent);
+
 		}
 
 		return false; // http://developer.android.com/reference/android/app/Fragment.html#onOptionsItemSelected(android.view.MenuItem)
