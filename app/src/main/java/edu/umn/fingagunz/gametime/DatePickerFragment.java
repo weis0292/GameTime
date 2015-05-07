@@ -16,31 +16,34 @@ import edu.umn.fingagunz.gametime.domain.Game;
  */
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener
 {
-	private Calendar calendar;
 	private Game game;
 
-	public DatePickerFragment(Calendar calendar, Game game)
+	public DatePickerFragment(Game game)
 	{
-		this.calendar = calendar;
 		this.game = game;
 	}
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState)
 	{
-		return new DatePickerDialog(getActivity(), this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(game.getGameDate());
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+		return new DatePickerDialog(getActivity(), this, year, month, day);
 	}
 
 	@Override
 	public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
 	{
 		// Get the date the game is currently set to
-		Date date = game.getGameDate();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(game.getGameDate());
 		// Update the values set by the user
-		date.setYear(year);
-		date.setMonth(monthOfYear);
-		date.setDate(dayOfMonth);
+		calendar.set(year, monthOfYear, dayOfMonth);
 		// Set the game date using the updated date
-		game.setGameDate(date);
+		game.setGameDate(calendar.getTime());
 	}
 }
