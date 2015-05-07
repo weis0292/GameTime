@@ -35,7 +35,7 @@ public class UpcomingGamesActivity extends ListActivity
 		try { player.fetchIfNeeded(); }
 		catch (ParseException e) { e.printStackTrace(); }
 		ListAdapter adapter = new PlayerGamesParseQueryAdapter(this, player);
-		setListAdapter(adapter);
+        setListAdapter(adapter);
 	}
 
 
@@ -61,7 +61,7 @@ public class UpcomingGamesActivity extends ListActivity
 		Game game = (Game)v.getTag();
 		Intent intent = new Intent(this, GameDetailActivity.class);
 		intent.putExtra("gameId", game.getObjectId());
-		intent.putExtra("currentUserId", currentUserId);
+		intent.putExtra("playerId", currentUserId);
 		startActivity(intent);
 	}
 }
