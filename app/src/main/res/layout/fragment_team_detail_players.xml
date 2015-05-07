@@ -1,26 +1,15 @@
 <FrameLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	tools:context="edu.umn.fingagunz.gametime.TeamDetailPlayersFragment">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="edu.umn.fingagunz.gametime.TeamDetailPlayersFragment">
 
-	<!-- TODO: Update blank fragment layout -->
-	<!--<TextView-->
-		<!--android:layout_width="match_parent"-->
-		<!--android:layout_height="match_parent"-->
-		<!--android:text="@string/hello_players_fragment"/>-->
+    <!-- TODO: Update blank fragment layout -->
 
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
-        android:layout_height="459dp"></ListView>
-
-    <Button
-        android:layout_width="259dp"
-        android:layout_height="wrap_content"
-        android:text="Add Player"
-        android:id="@+id/newPlayerButton"
-        android:layout_gravity="center_horizontal|bottom" />
+        android:layout_height="match_parent"></ListView>
 
 </FrameLayout>

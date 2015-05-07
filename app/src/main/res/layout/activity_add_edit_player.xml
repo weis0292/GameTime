@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Name"/>
+
     <EditText
         android:id="@+id/add_edit_player_name"
         android:layout_width="match_parent"
@@ -21,43 +22,46 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Phone"/>
+
     <EditText
         android:id="@+id/add_edit_player_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="phone"
-        android:ems="10" />
+        android:ems="10"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Address"/>
+
     <EditText
         android:id="@+id/add_edit_player_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPostalAddress"
-        android:ems="10" />
+        android:ems="10"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Email"/>
+
     <EditText
         android:id="@+id/add_edit_player_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
-        android:ems="10" />
+        android:ems="10"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Gender"/>
+
     <Spinner
         android:id="@+id/add_edit_player_gender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/gender_items"/>
 </LinearLayout>
-
