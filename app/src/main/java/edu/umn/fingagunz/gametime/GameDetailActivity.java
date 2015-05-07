@@ -22,6 +22,7 @@ public class GameDetailActivity extends Activity
 	final private static int REPLY_DECLINE = 0x02;
 
 	private AttendanceCommitment attendanceCommitment;
+	private Game game = new Game();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -34,7 +35,7 @@ public class GameDetailActivity extends Activity
 			@Override
 			public void onClick(View v)
 			{
-				setReplyIcons(REPLY_ACCEPT);
+				setReply(REPLY_ACCEPT);
 			}
 		});
 
@@ -43,7 +44,7 @@ public class GameDetailActivity extends Activity
 			@Override
 			public void onClick(View v)
 			{
-				setReplyIcons(REPLY_MAYBE);
+				setReply(REPLY_MAYBE);
 			}
 		});
 
@@ -52,14 +53,13 @@ public class GameDetailActivity extends Activity
 			@Override
 			public void onClick(View v)
 			{
-				setReplyIcons(REPLY_DECLINE);
+				setReply(REPLY_DECLINE);
 			}
 		});
 
 		Intent intent = getIntent();
 		String gameId = intent.getStringExtra("gameId");
 		String playerId = intent.getStringExtra("currentUserId");
-		Game game = new Game();
 		game.setObjectId(gameId);
 		try { game.fetchIfNeeded(); }
 		catch (ParseException e) { e.printStackTrace(); }
@@ -92,9 +92,18 @@ public class GameDetailActivity extends Activity
 
 	private void setReplyIcons(int reply)
 	{
-		getAcceptImageView().setImageResource(reply == REPLY_ACCEPT ? R.mipmap.ic_thumb_up_black_24dp : R.mipmap.ic_thumb_up_grey600_24dp);
-		getMaybeImageView().setImageResource(reply == REPLY_MAYBE ? R.mipmap.ic_thumbs_up_down_black_24dp : R.mipmap.ic_thumbs_up_down_grey600_24dp);
-		getDeclineImageView().setImageResource(reply == REPLY_DECLINE ? R.mipmap.ic_thumb_down_black_24dp : R.mipmap.ic_thumb_down_grey600_24dp);
+		getAcceptImageView().setImageResource(reply == REPLY_ACCEPT ? R.mipmap.ic_thumb_up_black_36dp : R.mipmap.ic_thumb_up_grey600_36dp);
+		getMaybeImageView().setImageResource(reply == REPLY_MAYBE ? R.mipmap.ic_thumbs_up_down_black_36dp : R.mipmap.ic_thumbs_up_down_grey600_36dp);
+		getDeclineImageView().setImageResource(reply == REPLY_DECLINE ? R.mipmap.ic_thumb_down_black_36dp : R.mipmap.ic_thumb_down_grey600_36dp);
+	}
+
+	private void setReply(int reply)
+	{
+		String rsvpCode = reply == REPLY_ACCEPT ? "Yes" : (reply == REPLY_MAYBE ? "Maybe" : "No");
+		attendanceCommitment.setRSVPCode(rsvpCode);
+		try { attendanceCommitment.save(); }
+		catch (ParseException e) { e.printStackTrace(); }
+		setReplyIcons(reply);
 	}
 
 	private ImageView getAcceptImageView()
@@ -126,6 +135,9 @@ public class GameDetailActivity extends Activity
 		switch (item.getItemId())
 		{
 			case R.id.action_edit:
+				Intent intent = new Intent(this, AddEditGameActivity.class);
+				intent.putExtra("GameObjectId", game.getObjectId());
+				startActivity(intent);
 				return true;
 		}
 
