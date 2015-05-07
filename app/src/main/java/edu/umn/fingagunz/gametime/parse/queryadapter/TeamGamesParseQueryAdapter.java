@@ -1,8 +1,11 @@
 package edu.umn.fingagunz.gametime.parse.queryadapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.parse.ParseQuery;
@@ -42,6 +45,7 @@ public class TeamGamesParseQueryAdapter extends ParseQueryAdapter<Game> {
 		v.setTag(game);
 		((TextView) v.findViewById(R.id.game_location_description_label)).setText(game.getLocationDescription());
         //((TextView)v.findViewById(R.id.game_dateTime_label)).setText(game.getGameDate().toString());
+        ((ImageView)v.findViewById(R.id.game_attendance_commitment)).setImageResource(R.mipmap.ic_thumb_down_black_24dp);
 
 		return v;
 	}

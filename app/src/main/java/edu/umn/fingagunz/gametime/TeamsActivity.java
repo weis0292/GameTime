@@ -17,6 +17,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import edu.umn.fingagunz.gametime.domain.Player;
+import edu.umn.fingagunz.gametime.util.CurrentUserUtil;
 
 public class TeamsActivity extends ListActivity
 {
@@ -29,7 +30,7 @@ public class TeamsActivity extends ListActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_teams);
 
-		String name = getProfileName();
+		String name = CurrentUserUtil.getProfileName();
 		if (TextUtils.isEmpty(name))
 		{
 			navigateToProfileActivity();
@@ -41,7 +42,7 @@ public class TeamsActivity extends ListActivity
 			// time entering the app.
 			final ListActivity activity = this;
 			ParseQuery<Player> query = new ParseQuery<>(Player.class);
-			query.whereEqualTo("playerName", getProfileName());
+			query.whereEqualTo("playerName", CurrentUserUtil.getProfileName());
 			query.getFirstInBackground(new GetCallback<Player>()
 			{
 				@Override
@@ -112,15 +113,10 @@ public class TeamsActivity extends ListActivity
 	private void navigateToProfileActivity()
 	{
 		Intent intent = new Intent(this, ProfileActivity.class);
-		intent.putExtra(getString(R.string.profile_name_key), getProfileName());
+		intent.putExtra(getString(R.string.profile_name_key), CurrentUserUtil.getProfileName());
 		startActivity(intent);
 	}
 
-	private String getProfileName()
-	{
-		SharedPreferences preferences = getSharedPreferences(getString(R.string.preferences_profile), Context.MODE_PRIVATE);
-		return preferences.getString(getString(R.string.profile_name_key), "");
-	}
 
 	@Override
 	protected void onResume() {

@@ -1,8 +1,10 @@
 package edu.umn.fingagunz.gametime.parse.queryadapter;
 
 import android.content.Context;
+import android.renderscript.Allocation;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.parse.ParseException;
@@ -11,6 +13,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 
 import edu.umn.fingagunz.gametime.R;
+import edu.umn.fingagunz.gametime.domain.AttendanceCommitment;
 import edu.umn.fingagunz.gametime.domain.Game;
 import edu.umn.fingagunz.gametime.domain.Player;
 import edu.umn.fingagunz.gametime.domain.TeamMember;
@@ -49,8 +52,40 @@ public class PlayerGamesParseQueryAdapter extends ParseQueryAdapter<Game>
 		super.getItemView(game, v, parent);
 
 		v.setTag(game);
+        /*
+        Player player = new Player();
+        player.setObjectId(playerId);
+        AttendanceCommitment attendanceCommitment = new AttendanceCommitment();
+        ParseQuery<AttendanceCommitment> query = new ParseQuery<>(AttendanceCommitment.class);
+        query.whereEqualTo("game", game);
+        query.whereEqualTo("player", player);
+        try { attendanceCommitment = query.getFirst(); }
+        catch (ParseException e) { e.printStackTrace(); }
+
+        String rsvpCode = attendanceCommitment.getRSVPCode();
+
+        switch (rsvpCode)
+        {
+            case "Yes":
+                ((ImageView)v.findViewById(R.id.game_attendance_commitment)).setImageResource(R.mipmap.ic_thumb_up_black_24dp);
+                break;
+
+            case "No":
+                ((ImageView)v.findViewById(R.id.game_attendance_commitment)).setImageResource(R.mipmap.ic_thumb_down_black_24dp);
+                break;
+
+            case "Maybe":
+                ((ImageView)v.findViewById(R.id.game_attendance_commitment)).setImageResource(R.mipmap.ic_thumbs_up_down_black_24dp);
+                break;
+        }
+        */
+        ((ImageView)v.findViewById(R.id.game_attendance_commitment)).setImageResource(R.mipmap.ic_thumb_up_black_24dp);
+
 		((TextView)v.findViewById(R.id.game_location_description_label)).setText(game.getLocationDescription());
 		//((TextView)v.findViewById(R.id.game_dateTime_label)).setText(game.getGameDate().toString());
+
+
+
 
 		return v;
 	}

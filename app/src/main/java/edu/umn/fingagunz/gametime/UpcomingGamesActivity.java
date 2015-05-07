@@ -35,7 +35,7 @@ public class UpcomingGamesActivity extends ListActivity
 		try { player.fetchIfNeeded(); }
 		catch (ParseException e) { e.printStackTrace(); }
 		ListAdapter adapter = new PlayerGamesParseQueryAdapter(this, player);
-		setListAdapter(adapter);
+        setListAdapter(adapter);
 	}
 
 
