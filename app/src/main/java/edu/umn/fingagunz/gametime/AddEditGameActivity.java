@@ -74,9 +74,7 @@ public class AddEditGameActivity extends Activity
 
 	public void onDatePickerClicked(View view)
 	{
-		Date date = new Date();
 		DialogFragment datePicker = new DatePickerFragment(game);
-		datePicker.setArguments();
 		datePicker.show(getFragmentManager(), "datePicker");
 	}
 }
