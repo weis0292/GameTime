@@ -2,10 +2,10 @@
 <resources>
 
     <string name="app_name">GameTime</string>
-    <string name="title_activity_teams">TeamsActivity</string>
+    <string name="title_activity_teams">My Teams</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_team_detail">TeamDetailActivity</string>
+    <string name="title_activity_team_detail">Team Details</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_games_fragment">Hello blank games fragment</string>
@@ -23,7 +23,7 @@
     <string name="title_activity_add_edit_game">Add/Edit Game</string>
     <string name="title_activity_add_edit_team">Add/Edit Team</string>
     <string name="title_activity_add_edit_player">Add/Edit Player</string>
-    <string name="title_activity_game_detail">GameDetailActivity</string>
-    <string name="title_activity_add_existing_player">AddExistingPlayerActivity</string>
+    <string name="title_activity_game_detail">Game Details</string>
+    <string name="title_activity_add_existing_player">Add Existing Player</string>
 
 </resources>
