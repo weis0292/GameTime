@@ -66,10 +66,6 @@ public class PlayerListAdapter extends ArrayAdapter<Player> {
 			case "F":
 				holder.genderImage.setImageResource(R.mipmap.ic_gender_female_black_24dp);
 				break;
-
-			case "?":
-				holder.genderImage.setImageResource(R.mipmap.ic_gender_transgender_black_24dp);
-				break;
 		}
 
 		return row;
