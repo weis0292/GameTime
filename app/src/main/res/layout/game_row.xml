@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
 
-	<TextView
-		android:id="@+id/game_location_description_label"
-		android:text="Example Description"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:textSize="24sp"
-        android:paddingTop="16dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"/>
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:text="Example Description"
+        android:id="@+id/game_location_description_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="24sp"
+        android:layout_gravity="center_vertical"/>
 
+        <!--
     <TextView
         android:id="@+id/game_dateTime_label"
         android:text="Example Description"
@@ -23,6 +25,16 @@
         android:paddingTop="4dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:paddingBottom="8dp" />
+        android:paddingBottom="8dp"
+        android:layout_gravity="center_vertical" />
+        -->
+    <ImageView
+        android:id="@+id/game_player_rsvp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@mipmap/ic_thumbs_up_down_black_24dp"/>
+
+
 
 </LinearLayout>

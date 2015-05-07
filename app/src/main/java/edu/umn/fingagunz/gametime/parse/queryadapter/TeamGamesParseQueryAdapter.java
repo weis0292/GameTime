@@ -41,7 +41,7 @@ public class TeamGamesParseQueryAdapter extends ParseQueryAdapter<Game> {
 
 		v.setTag(game);
 		((TextView) v.findViewById(R.id.game_location_description_label)).setText(game.getLocationDescription());
-        ((TextView)v.findViewById(R.id.game_dateTime_label)).setText(game.getGameDate().toString());
+        //((TextView)v.findViewById(R.id.game_dateTime_label)).setText(game.getGameDate().toString());
 
 		return v;
 	}
