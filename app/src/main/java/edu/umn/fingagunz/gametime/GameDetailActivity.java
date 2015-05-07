@@ -75,6 +75,7 @@ public class GameDetailActivity extends Activity {
 			}
 			else
 			{
+				// If no commitment exists, add a default one.
 				attendanceCommitment = new AttendanceCommitment();
 				attendanceCommitment.setPlayer(player);
 				attendanceCommitment.setGame(game);
