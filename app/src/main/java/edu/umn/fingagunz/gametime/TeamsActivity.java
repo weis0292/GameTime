@@ -121,4 +121,14 @@ public class TeamsActivity extends ListActivity
 		SharedPreferences preferences = getSharedPreferences(getString(R.string.preferences_profile), Context.MODE_PRIVATE);
 		return preferences.getString(getString(R.string.profile_name_key), "");
 	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		TeamsParseQueryAdapter listAdapter = (TeamsParseQueryAdapter) getListAdapter();
+		if (listAdapter != null) {
+			listAdapter.notifyDataSetChanged();
+		}
+	}
 }
