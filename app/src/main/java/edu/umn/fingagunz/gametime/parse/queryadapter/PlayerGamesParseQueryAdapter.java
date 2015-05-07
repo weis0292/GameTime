@@ -38,16 +38,16 @@ public class PlayerGamesParseQueryAdapter extends ParseQueryAdapter<Game>
 		setTextKey("gameLocationDescription");
 	}
 
-//	@Override
-//	public View getItemView(Game object, View v, ViewGroup parent)
-//	{
-//		if (v == null)
-//		{
-//			v = View.inflate(getContext(), R.layout.activity_teams_row, null);
-//		}
-//
-//		super.getItemView(object, v, parent);
-//
+	@Override
+	public View getItemView(Game game, View v, ViewGroup parent)
+	{
+		if (v == null)
+		{
+			v = View.inflate(getContext(), R.layout.activity_teams_row, null);
+		}
+
+		super.getItemView(game, v, parent);
+
 //		try
 //		{
 //			ParseObject team = object.getParseObject("team");
@@ -58,7 +58,7 @@ public class PlayerGamesParseQueryAdapter extends ParseQueryAdapter<Game>
 //		{
 //			// I have absolutely no idea what to do here?!?!?!
 //		}
-//
-//		return v;
-//	}
+
+		return v;
+	}
 }

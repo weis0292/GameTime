@@ -96,6 +96,7 @@ public class TeamsActivity extends ListActivity
 		else if (id == R.id.action_add_team)
 		{
 			Intent intent = new Intent(this, AddEditTeamActivity.class);
+			intent.putExtra("playerId", player.getObjectId());
 			startActivity(intent);
 		}
 		else if (id == R.id.action_upcoming_games)
