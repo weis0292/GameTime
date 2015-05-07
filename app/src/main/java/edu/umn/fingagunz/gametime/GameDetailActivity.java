@@ -15,8 +15,7 @@ import edu.umn.fingagunz.gametime.domain.AttendanceCommitment;
 import edu.umn.fingagunz.gametime.domain.Game;
 import edu.umn.fingagunz.gametime.domain.Player;
 
-public class GameDetailActivity extends Activity
-{
+public class GameDetailActivity extends Activity {
 	final private static int REPLY_ACCEPT = 0x00;
 	final private static int REPLY_MAYBE = 0x01;
 	final private static int REPLY_DECLINE = 0x02;
@@ -25,44 +24,40 @@ public class GameDetailActivity extends Activity
 	private Game game = new Game();
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game_detail);
 
-		getAcceptImageView().setOnClickListener(new View.OnClickListener()
-		{
+		getAcceptImageView().setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View v)
-			{
+			public void onClick(View v) {
 				setReply(REPLY_ACCEPT);
 			}
 		});
 
-		getMaybeImageView().setOnClickListener(new View.OnClickListener()
-		{
+		getMaybeImageView().setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View v)
-			{
+			public void onClick(View v) {
 				setReply(REPLY_MAYBE);
 			}
 		});
 
-		getDeclineImageView().setOnClickListener(new View.OnClickListener()
-		{
+		getDeclineImageView().setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View v)
-			{
+			public void onClick(View v) {
 				setReply(REPLY_DECLINE);
 			}
 		});
 
 		Intent intent = getIntent();
 		String gameId = intent.getStringExtra("gameId");
-		String playerId = intent.getStringExtra("currentUserId");
+		String playerId = intent.getStringExtra("playerId");
 		game.setObjectId(gameId);
-		try { game.fetchIfNeeded(); }
-		catch (ParseException e) { e.printStackTrace(); }
+		try {
+			game.fetchIfNeeded();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 
 		Player player = new Player();
 		player.setObjectId(playerId);
@@ -70,12 +65,14 @@ public class GameDetailActivity extends Activity
 		ParseQuery<AttendanceCommitment> query = new ParseQuery<>(AttendanceCommitment.class);
 		query.whereEqualTo("game", game);
 		query.whereEqualTo("player", player);
-		try { attendanceCommitment = query.getFirst(); }
-		catch (ParseException e) { e.printStackTrace(); }
+		try {
+			attendanceCommitment = query.getFirst();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 
 		String rsvpCode = attendanceCommitment.getRSVPCode();
-		switch (rsvpCode)
-		{
+		switch (rsvpCode) {
 			case "Yes":
 				setReplyIcons(REPLY_ACCEPT);
 				break;
@@ -90,50 +87,45 @@ public class GameDetailActivity extends Activity
 		}
 	}
 
-	private void setReplyIcons(int reply)
-	{
+	private void setReplyIcons(int reply) {
 		getAcceptImageView().setImageResource(reply == REPLY_ACCEPT ? R.mipmap.ic_thumb_up_black_36dp : R.mipmap.ic_thumb_up_grey600_36dp);
 		getMaybeImageView().setImageResource(reply == REPLY_MAYBE ? R.mipmap.ic_thumbs_up_down_black_36dp : R.mipmap.ic_thumbs_up_down_grey600_36dp);
 		getDeclineImageView().setImageResource(reply == REPLY_DECLINE ? R.mipmap.ic_thumb_down_black_36dp : R.mipmap.ic_thumb_down_grey600_36dp);
 	}
 
-	private void setReply(int reply)
-	{
+	private void setReply(int reply) {
 		String rsvpCode = reply == REPLY_ACCEPT ? "Yes" : (reply == REPLY_MAYBE ? "Maybe" : "No");
 		attendanceCommitment.setRSVPCode(rsvpCode);
-		try { attendanceCommitment.save(); }
-		catch (ParseException e) { e.printStackTrace(); }
+		try {
+			attendanceCommitment.save();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		setReplyIcons(reply);
 	}
 
-	private ImageView getAcceptImageView()
-	{
-		return (ImageView)findViewById(R.id.game_detail_accept_icon);
+	private ImageView getAcceptImageView() {
+		return (ImageView) findViewById(R.id.game_detail_accept_icon);
 	}
 
-	private ImageView getMaybeImageView()
-	{
-		return (ImageView)findViewById(R.id.game_detail_maybe_icon);
+	private ImageView getMaybeImageView() {
+		return (ImageView) findViewById(R.id.game_detail_maybe_icon);
 	}
 
-	private ImageView getDeclineImageView()
-	{
-		return (ImageView)findViewById(R.id.game_detail_decline_icon);
+	private ImageView getDeclineImageView() {
+		return (ImageView) findViewById(R.id.game_detail_decline_icon);
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
+	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menu_game_detail, menu);
 		return true;
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item)
-	{
-		switch (item.getItemId())
-		{
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
 			case R.id.action_edit:
 				Intent intent = new Intent(this, AddEditGameActivity.class);
 				intent.putExtra("GameObjectId", game.getObjectId());

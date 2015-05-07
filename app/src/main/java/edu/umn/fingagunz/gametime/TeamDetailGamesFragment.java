@@ -12,10 +12,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import edu.umn.fingagunz.gametime.domain.Game;
 import edu.umn.fingagunz.gametime.domain.Team;
 import edu.umn.fingagunz.gametime.parse.queryadapter.TeamGamesParseQueryAdapter;
+import edu.umn.fingagunz.gametime.util.CurrentUserUtil;
 
 
 /**
@@ -140,4 +142,20 @@ public class TeamDetailGamesFragment extends ListFragment {
 		return new TeamGamesParseQueryAdapter(activity, team);
 	}
 
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		super.onListItemClick(l, v, position, id);
+
+		Game game = (Game) v.getTag();
+		Intent intent = new Intent(getActivity(), GameDetailActivity.class);
+		intent.putExtra("gameId", game.getObjectId());
+		intent.putExtra("playerId", CurrentUserUtil.getCurrentPlayer(getActivity()).getObjectId());
+		startActivity(intent);
+	}
+
+	/*
+
+
+
+ */
 }
