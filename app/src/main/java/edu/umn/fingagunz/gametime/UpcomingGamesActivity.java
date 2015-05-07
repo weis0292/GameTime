@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.parse.ParseException;
 
+import edu.umn.fingagunz.gametime.domain.Game;
 import edu.umn.fingagunz.gametime.domain.Player;
 import edu.umn.fingagunz.gametime.parse.queryadapter.PlayerGamesParseQueryAdapter;
 
@@ -57,5 +60,16 @@ public class UpcomingGamesActivity extends ListActivity
 		}
 
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id)
+	{
+		super.onListItemClick(l, v, position, id);
+
+		Game game = (Game)v.getTag();
+		Intent intent = new Intent(this, GameDetailActivity.class);
+		intent.putExtra("gameId", game.getObjectId());
+		startActivity(intent);
 	}
 }
