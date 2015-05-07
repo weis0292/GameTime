@@ -12,6 +12,10 @@ import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
+import java.util.List;
+
+import edu.umn.fingagunz.gametime.domain.AttendanceCommitment;
+import edu.umn.fingagunz.gametime.domain.Game;
 import edu.umn.fingagunz.gametime.domain.Player;
 import edu.umn.fingagunz.gametime.domain.Sport;
 import edu.umn.fingagunz.gametime.domain.Team;
@@ -97,6 +101,19 @@ public class AddEditPlayerActivity extends Activity
 
             try {
                 newTeamMember.save();
+
+	            ParseQuery<Game> gamesQuery = new ParseQuery<>(Game.class);
+	            gamesQuery.whereEqualTo("team", team);
+	            List<Game> games = gamesQuery.find();
+
+	            for (Game game : games)
+	            {
+		            AttendanceCommitment commitment = new AttendanceCommitment();
+		            commitment.setPlayer(newTeamMember.getPlayer());
+		            commitment.setGame(game);
+		            commitment.setRSVPCode("Maybe");
+		            commitment.saveInBackground();
+	            }
             } catch (ParseException ex) {
             }
 

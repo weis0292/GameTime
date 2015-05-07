@@ -12,7 +12,12 @@ import android.widget.ListView;
 
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
+import java.util.List;
+
+import edu.umn.fingagunz.gametime.domain.AttendanceCommitment;
+import edu.umn.fingagunz.gametime.domain.Game;
 import edu.umn.fingagunz.gametime.domain.Player;
 import edu.umn.fingagunz.gametime.domain.Team;
 import edu.umn.fingagunz.gametime.domain.TeamMember;
@@ -53,8 +58,24 @@ public class AddExistingPlayerActivity extends ListActivity {
         newTeamMember.setPlayer(existingPlayer);
         newTeamMember.setTeam(team);
 
-        try { newTeamMember.save(); }
-        catch (ParseException ex){}
+        try
+        {
+	        newTeamMember.save();
+
+	        ParseQuery<Game> gamesQuery = new ParseQuery<>(Game.class);
+	        gamesQuery.whereEqualTo("team", team);
+	        List<Game> games = gamesQuery.find();
+
+	        for (Game game : games)
+	        {
+		        AttendanceCommitment commitment = new AttendanceCommitment();
+		        commitment.setPlayer(newTeamMember.getPlayer());
+		        commitment.setGame(game);
+		        commitment.setRSVPCode("Maybe");
+		        commitment.saveInBackground();
+	        }
+        }
+        catch (ParseException ex) { }
 
         setResult(RESULT_OK);
         finish();
