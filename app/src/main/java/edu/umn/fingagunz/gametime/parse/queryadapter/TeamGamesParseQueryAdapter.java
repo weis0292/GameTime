@@ -46,8 +46,9 @@ public class TeamGamesParseQueryAdapter extends ParseQueryAdapter<Game> {
 
 		super.getItemView(game, v, parent);
 
-        Player player = CurrentUserUtil.getCurrentPlayer(getContext());
+        v.setTag(game);
 
+        Player player = CurrentUserUtil.getCurrentPlayer(getContext());
         ParseQuery<AttendanceCommitment> query = new ParseQuery<>(AttendanceCommitment.class);
         query.whereEqualTo("game", game);
         query.whereEqualTo("player", player);
@@ -70,11 +71,12 @@ public class TeamGamesParseQueryAdapter extends ParseQueryAdapter<Game> {
                     break;
 
                 case "Maybe":
-                    ((ImageView) v.findViewById(R.id.game_attendance_commitment)).setImageResource(R.mipmap.ic_thumbs_up_down_black_24dp);
+//                    ((ImageView) v.findViewById(R.id.game_attendance_commitment)).setImageResource(R.mipmap.ic_thumbs_up_down_black_24dp);
+                    ((ImageView) v.findViewById(R.id.game_attendance_commitment)).setImageResource(R.mipmap.ic_thumbs_up_down_grey600_24dp);
+
                     break;
             }
         }
-		v.setTag(game);
 		((TextView) v.findViewById(R.id.game_location_description_label)).setText(game.getLocationDescription());
         //((TextView)v.findViewById(R.id.game_dateTime_label)).setText(game.getGameDate().toString());
 
