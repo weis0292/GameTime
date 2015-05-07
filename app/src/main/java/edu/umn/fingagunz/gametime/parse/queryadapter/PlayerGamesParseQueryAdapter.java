@@ -17,6 +17,7 @@ import edu.umn.fingagunz.gametime.domain.AttendanceCommitment;
 import edu.umn.fingagunz.gametime.domain.Game;
 import edu.umn.fingagunz.gametime.domain.Player;
 import edu.umn.fingagunz.gametime.domain.TeamMember;
+import edu.umn.fingagunz.gametime.util.CurrentUserUtil;
 
 /**
  * Created by Mike on 5/6/2015.
@@ -52,34 +53,35 @@ public class PlayerGamesParseQueryAdapter extends ParseQueryAdapter<Game>
 		super.getItemView(game, v, parent);
 
 		v.setTag(game);
-        /*
-        Player player = new Player();
-        player.setObjectId(playerId);
-        AttendanceCommitment attendanceCommitment = new AttendanceCommitment();
+
+        Player player = CurrentUserUtil.getCurrentPlayer(getContext());
         ParseQuery<AttendanceCommitment> query = new ParseQuery<>(AttendanceCommitment.class);
         query.whereEqualTo("game", game);
         query.whereEqualTo("player", player);
-        try { attendanceCommitment = query.getFirst(); }
-        catch (ParseException e) { e.printStackTrace(); }
+        AttendanceCommitment attendanceCommitment = new AttendanceCommitment();
+        try {
+            attendanceCommitment = query.getFirst();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         String rsvpCode = attendanceCommitment.getRSVPCode();
+        if(rsvpCode!=null) {
+            switch (rsvpCode) {
+                case "Yes":
+                    ((ImageView) v.findViewById(R.id.game_attendance_commitment)).setImageResource(R.mipmap.ic_thumb_up_black_24dp);
+                    break;
 
-        switch (rsvpCode)
-        {
-            case "Yes":
-                ((ImageView)v.findViewById(R.id.game_attendance_commitment)).setImageResource(R.mipmap.ic_thumb_up_black_24dp);
-                break;
+                case "No":
+                    ((ImageView) v.findViewById(R.id.game_attendance_commitment)).setImageResource(R.mipmap.ic_thumb_down_black_24dp);
+                    break;
 
-            case "No":
-                ((ImageView)v.findViewById(R.id.game_attendance_commitment)).setImageResource(R.mipmap.ic_thumb_down_black_24dp);
-                break;
-
-            case "Maybe":
-                ((ImageView)v.findViewById(R.id.game_attendance_commitment)).setImageResource(R.mipmap.ic_thumbs_up_down_black_24dp);
-                break;
+                case "Maybe":
+//                    ((ImageView) v.findViewById(R.id.game_attendance_commitment)).setImageResource(R.mipmap.ic_thumbs_up_down_black_24dp);
+                    ((ImageView) v.findViewById(R.id.game_attendance_commitment)).setImageResource(R.mipmap.ic_thumbs_up_down_grey600_24dp);
+                    break;
+            }
         }
-        */
-        ((ImageView)v.findViewById(R.id.game_attendance_commitment)).setImageResource(R.mipmap.ic_thumb_up_black_24dp);
 
 		((TextView)v.findViewById(R.id.game_location_description_label)).setText(game.getLocationDescription());
 		//((TextView)v.findViewById(R.id.game_dateTime_label)).setText(game.getGameDate().toString());
