@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import edu.umn.fingagunz.gametime.domain.AttendanceCommitment;
@@ -61,6 +64,20 @@ public class GameDetailActivity extends Activity {
 			e.printStackTrace();
 		}
 
+		if (game.getGameDate() != null)
+		{
+			((TextView) findViewById(R.id.game_detail_date_label)).setText(new SimpleDateFormat("E MMM d, yyyy").format(game.getGameDate()));
+			((TextView) findViewById(R.id.game_detail_time_label)).setText(new SimpleDateFormat("h:mm a").format(game.getGameDate()));
+		}
+		if (game.getLocationDescription() != null)
+		{
+			((TextView) findViewById(R.id.game_detail_location_description)).setText(game.getLocationDescription());
+		}
+		if (game.getAddress() != null)
+		{
+			((TextView) findViewById(R.id.game_detail_location_address)).setText(game.getAddress());
+		}
+
 		Player player = new Player();
 		player.setObjectId(playerId);
 
@@ -75,6 +92,7 @@ public class GameDetailActivity extends Activity {
 			}
 			else
 			{
+				// If no commitment exists, add a default one.
 				attendanceCommitment = new AttendanceCommitment();
 				attendanceCommitment.setPlayer(player);
 				attendanceCommitment.setGame(game);

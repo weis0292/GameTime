@@ -51,16 +51,10 @@
 				android:text="Example Game Location Description"/>
 
 			<TextView
-				android:id="@+id/game_detail_location_address_1"
+				android:id="@+id/game_detail_location_address"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:text="123 Fake Address"/>
-
-			<TextView
-				android:id="@+id/game_detail_location_address_2"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:text="Springfield ST, 55555"/>
 
 		</LinearLayout>
 
