@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.parse.ParseException;
-import com.parse.ParseQuery;
 
 import edu.umn.fingagunz.gametime.domain.Sport;
 import edu.umn.fingagunz.gametime.domain.Team;

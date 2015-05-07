@@ -17,6 +17,7 @@
     <string name="profile_name_label">Name</string>
     <string name="preferences_profile">profile_preferences</string>
     <string name="profile_name_key">profile_name</string>
+	<string name="action_upcoming_games">Upcoming Games</string>
     <string name="title_activity_upcoming_games">UpcomingGamesActivity</string>
     <string name="title_activity_add_edit_game">AddEditGameActivity</string>
     <string name="title_activity_add_edit_team">AddEditTeamActivity</string>

@@ -7,6 +7,12 @@
 		android:showAsAction="always"/>
 
 	<item
+		android:id="@+id/action_upcoming_games"
+		android:title="@string/action_upcoming_games"
+		android:icon="@mipmap/ic_calendar_black_24dp"
+		android:showAsAction="always"/>
+
+	<item
 		android:id="@+id/action_add_team"
 		android:title="@string/action_add_team"
 		android:icon="@mipmap/ic_plus_black_24dp"

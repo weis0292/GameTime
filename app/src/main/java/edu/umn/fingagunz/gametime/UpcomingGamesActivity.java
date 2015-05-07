@@ -1,12 +1,19 @@
 package edu.umn.fingagunz.gametime;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListAdapter;
+
+import com.parse.ParseException;
+
+import edu.umn.fingagunz.gametime.domain.Player;
+import edu.umn.fingagunz.gametime.parse.queryadapter.PlayerGamesParseQueryAdapter;
 
 
-public class UpcomingGamesActivity extends ActionBarActivity
+public class UpcomingGamesActivity extends ListActivity
 {
 
 	@Override
@@ -14,6 +21,16 @@ public class UpcomingGamesActivity extends ActionBarActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_upcoming_games);
+
+		Intent intent = getIntent();
+		String playerId = intent.getStringExtra("playerId");
+
+		Player player = new Player();
+		player.setObjectId(playerId);
+		try { player.fetchIfNeeded(); }
+		catch (ParseException e) { e.printStackTrace(); }
+		ListAdapter adapter = new PlayerGamesParseQueryAdapter(this, player);
+		setListAdapter(adapter);
 	}
 
 
