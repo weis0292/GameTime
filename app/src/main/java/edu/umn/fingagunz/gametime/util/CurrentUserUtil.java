@@ -14,8 +14,8 @@ import edu.umn.fingagunz.gametime.domain.Player;
  */
 public class CurrentUserUtil {
 
-	public static Player getCurrentPlayer(Activity activity) {
-		String currentUser = getCurrentUser(activity);
+	public static Player getCurrentPlayer(Context context) {
+		String currentUser = getCurrentUser(context);
 		if (currentUser == null || "".equals(currentUser)) {
 			return null;
 		}
@@ -33,8 +33,8 @@ public class CurrentUserUtil {
 		return player;
 	}
 
-	public static String getCurrentUser(Activity activity) {
-		SharedPreferences preferences = activity.getSharedPreferences("profile_preferences", Context.MODE_PRIVATE);
+	public static String getCurrentUser(Context context) {
+		SharedPreferences preferences = context.getSharedPreferences("profile_preferences", Context.MODE_PRIVATE);
 		return preferences.getString("profile_name", "");
 	}
 }
