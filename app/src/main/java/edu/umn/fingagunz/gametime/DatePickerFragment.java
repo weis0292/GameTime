@@ -3,6 +3,7 @@ package edu.umn.fingagunz.gametime;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.DatePicker;
 
@@ -17,6 +18,7 @@ import edu.umn.fingagunz.gametime.domain.Game;
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener
 {
 	private Game game;
+	private OnDatePickerDialogDismissedListener dismissedListener;
 
 	public DatePickerFragment(Game game)
 	{
@@ -45,5 +47,21 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 		calendar.set(year, monthOfYear, dayOfMonth);
 		// Set the game date using the updated date
 		game.setGameDate(calendar.getTime());
+	}
+
+	@Override
+	public void onDismiss(DialogInterface dialog)
+	{
+		super.onDismiss(dialog);
+
+		if(dismissedListener != null)
+		{
+			dismissedListener.onDatePickerDialogDismissed();
+		}
+	}
+
+	public void SetDatePickerDismissedListener(OnDatePickerDialogDismissedListener dismissedListener)
+	{
+		this.dismissedListener = dismissedListener;
 	}
 }

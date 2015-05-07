@@ -7,16 +7,19 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.parse.ParseException;
 
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import edu.umn.fingagunz.gametime.domain.Game;
+import edu.umn.fingagunz.gametime.domain.Team;
 
 
-public class AddEditGameActivity extends Activity
+public class AddEditGameActivity extends Activity implements OnDatePickerDialogDismissedListener, OnTimePickerDialogDismissedListener
 {
 	private Game game = new Game();
 
@@ -27,9 +30,15 @@ public class AddEditGameActivity extends Activity
 		setContentView(R.layout.activity_add_edit_game);
 
 		Intent intent = getIntent();
-		if (intent.hasExtra("gameId"))
+
+		String teamId = intent.getStringExtra("TeamObjectId");
+		Team team = new Team();
+		team.setObjectId(teamId);
+		game.setTeam(team);
+
+		if (intent.hasExtra("GameObjectId"))
 		{
-			String gameId = intent.getStringExtra("gameId");
+			String gameId = intent.getStringExtra("GameObjectId");
 			game.setObjectId(gameId);
 			try { game.fetchIfNeeded(); }
 			catch (ParseException e) { e.printStackTrace(); }
@@ -38,6 +47,11 @@ public class AddEditGameActivity extends Activity
 		{
 			game.setGameDate(new Date());
 		}
+
+		updateDateOnView();
+		updateTimeOnView();
+		((EditText)findViewById(R.id.game_edit_description)).setText(game.getLocationDescription());
+		((EditText)findViewById(R.id.game_edit_address)).setText(game.getAddress());
 	}
 
 
@@ -66,6 +80,12 @@ public class AddEditGameActivity extends Activity
 		switch (item.getItemId())
 		{
 			case R.id.action_accept:
+				game.setLocationDescription(((EditText)findViewById(R.id.game_edit_description)).getText().toString());
+				game.setAddress(((EditText)findViewById(R.id.game_edit_address)).getText().toString());
+				game.saveInBackground();
+
+				setResult(RESULT_OK);
+				finish();
 				return true;
 		}
 
@@ -74,7 +94,37 @@ public class AddEditGameActivity extends Activity
 
 	public void onDatePickerClicked(View view)
 	{
-		DialogFragment datePicker = new DatePickerFragment(game);
+		DatePickerFragment datePicker = new DatePickerFragment(game);
+		datePicker.SetDatePickerDismissedListener(this);
 		datePicker.show(getFragmentManager(), "datePicker");
+	}
+
+	@Override
+	public void onDatePickerDialogDismissed()
+	{
+		updateDateOnView();
+	}
+
+	private void updateDateOnView()
+	{
+		((TextView)findViewById(R.id.game_date_label)).setText(new SimpleDateFormat("E MMM d, yyyy").format(game.getGameDate()));
+	}
+
+	public void onTimePickerClicked(View view)
+	{
+		TimePickerFragment timePicker = new TimePickerFragment(game);
+		timePicker.setTimePickerDismissedListener(this);
+		timePicker.show(getFragmentManager(), "timePicker");
+	}
+
+	@Override
+	public void onTimerPickerDialogDismissed()
+	{
+		updateTimeOnView();
+	}
+
+	private void updateTimeOnView()
+	{
+		((TextView)findViewById(R.id.game_time_label)).setText(new SimpleDateFormat("h:mm a").format(game.getGameDate()));
 	}
 }

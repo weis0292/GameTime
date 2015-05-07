@@ -24,8 +24,8 @@ public class Game extends ParseObject
 	public Date getGameDate() { return getDate("gameDate"); }
 	public void setGameDate(Date date) { put("gameDate", date); }
 
-	public String getGameTime() { return getString("gameTime"); }
-	public void setGameTime(String gameTime) { put("gameTime", gameTime); }
+//	public String getGameTime() { return getString("gameTime"); }
+//	public void setGameTime(String gameTime) { put("gameTime", gameTime); }
 
 	public String getLocationDescription() { return getString("gameLocationDescription"); }
 	public void setLocationDescription(String locationDescription) { put("gameLocationDescription", locationDescription); }

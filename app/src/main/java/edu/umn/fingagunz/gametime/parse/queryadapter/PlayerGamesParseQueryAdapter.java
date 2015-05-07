@@ -43,13 +43,13 @@ public class PlayerGamesParseQueryAdapter extends ParseQueryAdapter<Game>
 	{
 		if (v == null)
 		{
-			v = View.inflate(getContext(), R.layout.activity_upcoming_games_row, null);
+			v = View.inflate(getContext(), R.layout.game_row, null);
 		}
 
 		super.getItemView(game, v, parent);
 
 		v.setTag(game);
-		((TextView)v.findViewById(R.id.upcoming_game_description_label)).setText(game.getLocationDescription());
+		((TextView)v.findViewById(R.id.game_location_description_label)).setText(game.getLocationDescription());
 
 		return v;
 	}
