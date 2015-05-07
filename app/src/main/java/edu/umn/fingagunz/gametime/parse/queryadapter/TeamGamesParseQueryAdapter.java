@@ -34,13 +34,13 @@ public class TeamGamesParseQueryAdapter extends ParseQueryAdapter<Game> {
 	@Override
 	public View getItemView(Game game, View v, ViewGroup parent) {
 		if (v == null) {
-			v = View.inflate(getContext(), R.layout.fragment_team_detail_games_row, null);
+			v = View.inflate(getContext(), R.layout.game_row, null);
 		}
 
 		super.getItemView(game, v, parent);
 
 		v.setTag(game);
-		((TextView) v.findViewById(R.id.team_detail_games_row_location_description)).setText(game.getLocationDescription());
+		((TextView) v.findViewById(R.id.game_location_description_label)).setText(game.getLocationDescription());
 
 		return v;
 	}
