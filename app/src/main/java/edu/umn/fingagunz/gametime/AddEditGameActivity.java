@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.parse.ParseException;
@@ -15,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import edu.umn.fingagunz.gametime.domain.Game;
+import edu.umn.fingagunz.gametime.domain.Team;
 
 
 public class AddEditGameActivity extends Activity implements OnDatePickerDialogDismissedListener, OnTimePickerDialogDismissedListener
@@ -28,9 +30,15 @@ public class AddEditGameActivity extends Activity implements OnDatePickerDialogD
 		setContentView(R.layout.activity_add_edit_game);
 
 		Intent intent = getIntent();
-		if (intent.hasExtra("gameId"))
+
+		String teamId = intent.getStringExtra("TeamObjectId");
+		Team team = new Team();
+		team.setObjectId(teamId);
+		game.setTeam(team);
+
+		if (intent.hasExtra("GameObjectId"))
 		{
-			String gameId = intent.getStringExtra("gameId");
+			String gameId = intent.getStringExtra("GameObjectId");
 			game.setObjectId(gameId);
 			try { game.fetchIfNeeded(); }
 			catch (ParseException e) { e.printStackTrace(); }
@@ -42,6 +50,8 @@ public class AddEditGameActivity extends Activity implements OnDatePickerDialogD
 
 		updateDateOnView();
 		updateTimeOnView();
+		((EditText)findViewById(R.id.game_edit_description)).setText(game.getLocationDescription());
+		((EditText)findViewById(R.id.game_edit_address)).setText(game.getAddress());
 	}
 
 
@@ -70,6 +80,12 @@ public class AddEditGameActivity extends Activity implements OnDatePickerDialogD
 		switch (item.getItemId())
 		{
 			case R.id.action_accept:
+				game.setLocationDescription(((EditText)findViewById(R.id.game_edit_description)).getText().toString());
+				game.setAddress(((EditText)findViewById(R.id.game_edit_address)).getText().toString());
+				game.saveInBackground();
+
+				setResult(RESULT_OK);
+				finish();
 				return true;
 		}
 
