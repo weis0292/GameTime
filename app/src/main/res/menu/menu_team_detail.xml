@@ -13,4 +13,10 @@
         android:id="@+id/team_detail_menu_add_game"
         android:title="Add Game"/>
 
+    <item
+        android:id="@+id/action_add_team"
+        android:title="@string/action_add_team"
+        android:icon="@mipmap/ic_plus_black_24dp"
+        android:showAsAction="always"/>
+
 </menu>
