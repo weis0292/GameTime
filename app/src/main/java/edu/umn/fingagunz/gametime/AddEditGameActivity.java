@@ -11,12 +11,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
+import edu.umn.fingagunz.gametime.domain.AttendanceCommitment;
 import edu.umn.fingagunz.gametime.domain.Game;
 import edu.umn.fingagunz.gametime.domain.Team;
+import edu.umn.fingagunz.gametime.domain.TeamMember;
 
 
 public class AddEditGameActivity extends Activity implements OnDatePickerDialogDismissedListener, OnTimePickerDialogDismissedListener
@@ -82,7 +86,26 @@ public class AddEditGameActivity extends Activity implements OnDatePickerDialogD
 			case R.id.action_accept:
 				game.setLocationDescription(((EditText)findViewById(R.id.game_edit_description)).getText().toString());
 				game.setAddress(((EditText)findViewById(R.id.game_edit_address)).getText().toString());
-				game.saveInBackground();
+				try
+				{
+					game.save();
+
+					ParseQuery<TeamMember> teamMembersQuery = new ParseQuery<>(TeamMember.class);
+					teamMembersQuery.whereEqualTo("team", game.getTeam());
+					List<TeamMember> teamMembers = teamMembersQuery.find();
+					for(TeamMember teamMember : teamMembers)
+					{
+						AttendanceCommitment commitment = new AttendanceCommitment();
+						commitment.setGame(game);
+						commitment.setPlayer(teamMember.getPlayer());
+						commitment.setRSVPCode("Maybe");
+						commitment.saveInBackground();
+					}
+				}
+				catch (ParseException e)
+				{
+					e.printStackTrace();
+				}
 
 				setResult(RESULT_OK);
 				finish();

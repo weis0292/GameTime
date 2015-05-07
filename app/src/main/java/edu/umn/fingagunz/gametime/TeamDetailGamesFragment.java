@@ -116,10 +116,6 @@ public class TeamDetailGamesFragment extends ListFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.team_detail_menu_add_game) {
 
-            /*
-
-            TODO
-
             // leaving this here in case it breaks something....
             //  if not, this can be deleted...
 
@@ -127,14 +123,6 @@ public class TeamDetailGamesFragment extends ListFragment {
 			Intent intent = new Intent(activity, AddEditGameActivity.class);
 			intent.putExtra("TeamObjectId", ((TeamDetailActivity) activity).getSelectedTeam().getObjectId());
 			startActivity(intent);
-            */
-
-            Activity activity = getActivity();
-            Intent intent = new Intent(activity, GameDetailActivity.class);
-            intent.putExtra("gameId", ((TeamDetailActivity) activity).getSelectedTeam().getObjectId());
-            intent.putExtra("playerId", currentUserId);
-            startActivity(intent);
-
 		}
 
 		return false; // http://developer.android.com/reference/android/app/Fragment.html#onOptionsItemSelected(android.view.MenuItem)
