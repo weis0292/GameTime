@@ -67,6 +67,7 @@ public class TeamDetailActivity
 
 	public void setSelectedTeam(Team team) {
 		this.selectedTeam = team;
+		setTitle(selectedTeam.getTeamName());
 	}
 
 }
