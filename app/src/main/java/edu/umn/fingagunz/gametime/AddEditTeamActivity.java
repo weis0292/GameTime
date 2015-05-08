@@ -76,9 +76,8 @@ public class AddEditTeamActivity extends Activity
             catch (ParseException ex){}
 
 			// Now navigate to the team detail page for this team
-			Intent intent = new Intent(this, TeamDetailActivity.class);
-			intent.putExtra("TeamObjectId", newTeam.getObjectId());
-			startActivity(intent);
+            setResult(RESULT_OK);
+            finish();
 
 			return true;
 		}
