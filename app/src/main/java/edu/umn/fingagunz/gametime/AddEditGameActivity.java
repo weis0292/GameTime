@@ -139,6 +139,9 @@ public class AddEditGameActivity extends Activity implements OnDatePickerDialogD
 	}
 
 	private void updateTimeOnView() {
-		((TextView) findViewById(R.id.game_time_label)).setText(new SimpleDateFormat("h:mm a").format(game.getGameDate()));
+		Date gameDate = game.getGameDate();
+		if (gameDate != null) {
+			((TextView) findViewById(R.id.game_time_label)).setText(new SimpleDateFormat("h:mm a").format(game.getGameDate()));
+		}
 	}
 }
