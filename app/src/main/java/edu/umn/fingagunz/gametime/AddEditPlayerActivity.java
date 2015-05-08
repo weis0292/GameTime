@@ -97,14 +97,14 @@ public class AddEditPlayerActivity extends Activity
 
             ParseQuery<TeamMember> teamMemberQuery = new ParseQuery<>(TeamMember.class);
             teamMemberQuery.whereEqualTo("team", team);
-            teamMemberQuery.whereEqualTo("player", existingPlayer);
+            teamMemberQuery.whereEqualTo("player", newPlayer);
             TeamMember newTeamMember = new TeamMember();
             try {
                 newTeamMember = teamMemberQuery.getFirst();
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            newTeamMember.setPlayer(existingPlayer);
+            newTeamMember.setPlayer(newPlayer);
             newTeamMember.setTeam(team);
 
             try {
