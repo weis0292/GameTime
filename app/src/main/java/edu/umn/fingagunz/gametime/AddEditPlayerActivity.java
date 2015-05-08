@@ -70,7 +70,7 @@ public class AddEditPlayerActivity extends Activity
             }
 
             try {
-                if (!existingPlayer.getObjectId().isEmpty()) {
+                if (existingPlayer.getObjectId() != null) {
                     newPlayer.setObjectId(existingPlayer.getObjectId());
                 }
             } catch (Exception ex) {
