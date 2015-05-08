@@ -18,8 +18,6 @@ import edu.umn.fingagunz.gametime.domain.Player;
 
 public class ProfileActivity extends Activity
 {
-	private Player player = new Player();
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -30,28 +28,6 @@ public class ProfileActivity extends Activity
 		String name = intent.getStringExtra(getString(R.string.profile_name_key));
 		((EditText)findViewById(R.id.profile_name_edit)).setText(name);
 
-		ParseQuery<Player> playerQuery = new ParseQuery<>(Player.class);
-		playerQuery.whereEqualTo("playerName", name);
-		playerQuery.getFirstInBackground(new GetCallback<Player>()
-		{
-			@Override
-			public void done(Player player, ParseException e)
-			{
-				if (player != null)
-				{
-					setPlayer(player);
-				}
-				else
-				{
-					setPlayer(new Player());
-				}
-			}
-		});
-	}
-
-	private void setPlayer(Player player)
-	{
-		this.player = player;
 	}
 
 	@Override
@@ -73,7 +49,7 @@ public class ProfileActivity extends Activity
 		//noinspection SimplifiableIfStatement
 		if (id == R.id.action_accept)
 		{
-			String name = ((EditText)findViewById(R.id.profile_name_edit)).getText().toString();
+			final String name = ((EditText)findViewById(R.id.profile_name_edit)).getText().toString();
 			if (name.isEmpty())
 			{
 				new AlertDialog.Builder(this)
@@ -89,8 +65,21 @@ public class ProfileActivity extends Activity
 					.commit();
 
 				// Save the name to the database.
-				player.setName(name);
-				player.saveInBackground();
+				ParseQuery<Player> playerQuery = new ParseQuery<>(Player.class);
+				playerQuery.whereEqualTo("playerName", name);
+				playerQuery.getFirstInBackground(new GetCallback<Player>()
+				{
+					@Override
+					public void done(Player player, ParseException e)
+					{
+						if (player == null)
+						{
+							player = new Player();
+							player.setName(name);
+							player.saveInBackground();
+						}
+					}
+				});
 
 				// Looks like we've gotten a valid name,
 				// let's get the heck outta here.
