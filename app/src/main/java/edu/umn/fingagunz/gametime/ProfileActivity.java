@@ -14,6 +14,7 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 
 import edu.umn.fingagunz.gametime.domain.Player;
+import edu.umn.fingagunz.gametime.util.CurrentUserUtil;
 
 
 public class ProfileActivity extends Activity
@@ -78,6 +79,8 @@ public class ProfileActivity extends Activity
 							player.setName(name);
 							player.saveInBackground();
 						}
+
+						CurrentUserUtil.resetCurrentPlayer();
 					}
 				});
 
