@@ -1,7 +1,6 @@
 package edu.umn.fingagunz.gametime;
 
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -23,14 +22,12 @@ import edu.umn.fingagunz.gametime.domain.Team;
 import edu.umn.fingagunz.gametime.domain.TeamMember;
 
 
-public class AddEditGameActivity extends Activity implements OnDatePickerDialogDismissedListener, OnTimePickerDialogDismissedListener
-{
+public class AddEditGameActivity extends Activity implements OnDatePickerDialogDismissedListener, OnTimePickerDialogDismissedListener {
 	private Game game = new Game();
 	private Boolean isEditingGame = false;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_edit_game);
 
@@ -41,37 +38,35 @@ public class AddEditGameActivity extends Activity implements OnDatePickerDialogD
 		team.setObjectId(teamId);
 		game.setTeam(team);
 
-		if (intent.hasExtra("GameObjectId"))
-		{
+		if (intent.hasExtra("GameObjectId")) {
 			isEditingGame = true;
 			String gameId = intent.getStringExtra("GameObjectId");
 			game.setObjectId(gameId);
-			try { game.fetchIfNeeded(); }
-			catch (ParseException e) { e.printStackTrace(); }
-		}
-		else
-		{
+			try {
+				game.fetchIfNeeded();
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		} else {
 			game.setGameDate(new Date());
 		}
 
 		updateDateOnView();
 		updateTimeOnView();
-		((EditText)findViewById(R.id.game_edit_description)).setText(game.getLocationDescription());
-		((EditText)findViewById(R.id.game_edit_address)).setText(game.getAddress());
+		((EditText) findViewById(R.id.game_edit_description)).setText(game.getLocationDescription());
+		((EditText) findViewById(R.id.game_edit_address)).setText(game.getAddress());
 	}
 
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
+	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menu_add_edit_game, menu);
 		return true;
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item)
-	{
+	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
@@ -83,22 +78,18 @@ public class AddEditGameActivity extends Activity implements OnDatePickerDialogD
 //			return true;
 //		}
 
-		switch (item.getItemId())
-		{
+		switch (item.getItemId()) {
 			case R.id.action_accept:
-				game.setLocationDescription(((EditText)findViewById(R.id.game_edit_description)).getText().toString());
-				game.setAddress(((EditText)findViewById(R.id.game_edit_address)).getText().toString());
-				try
-				{
+				game.setLocationDescription(((EditText) findViewById(R.id.game_edit_description)).getText().toString());
+				game.setAddress(((EditText) findViewById(R.id.game_edit_address)).getText().toString());
+				try {
 					game.save();
 
-					if (!isEditingGame)
-					{
+					if (!isEditingGame) {
 						ParseQuery<TeamMember> teamMembersQuery = new ParseQuery<>(TeamMember.class);
 						teamMembersQuery.whereEqualTo("team", game.getTeam());
 						List<TeamMember> teamMembers = teamMembersQuery.find();
-						for (TeamMember teamMember : teamMembers)
-						{
+						for (TeamMember teamMember : teamMembers) {
 							AttendanceCommitment commitment = new AttendanceCommitment();
 							commitment.setGame(game);
 							commitment.setPlayer(teamMember.getPlayer());
@@ -106,9 +97,7 @@ public class AddEditGameActivity extends Activity implements OnDatePickerDialogD
 							commitment.saveInBackground();
 						}
 					}
-				}
-				catch (ParseException e)
-				{
+				} catch (ParseException e) {
 					e.printStackTrace();
 				}
 
@@ -120,39 +109,36 @@ public class AddEditGameActivity extends Activity implements OnDatePickerDialogD
 		return super.onOptionsItemSelected(item);
 	}
 
-	public void onDatePickerClicked(View view)
-	{
+	public void onDatePickerClicked(View view) {
 		DatePickerFragment datePicker = new DatePickerFragment(game);
 		datePicker.SetDatePickerDismissedListener(this);
 		datePicker.show(getFragmentManager(), "datePicker");
 	}
 
 	@Override
-	public void onDatePickerDialogDismissed()
-	{
+	public void onDatePickerDialogDismissed() {
 		updateDateOnView();
 	}
 
-	private void updateDateOnView()
-	{
-		((TextView)findViewById(R.id.game_date_label)).setText(new SimpleDateFormat("E MMM d, yyyy").format(game.getGameDate()));
+	private void updateDateOnView() {
+		Date gameDate = game.getGameDate();
+		if (gameDate != null) {
+			((TextView) findViewById(R.id.game_date_label)).setText(new SimpleDateFormat("E MMM d, yyyy").format(game.getGameDate()));
+		}
 	}
 
-	public void onTimePickerClicked(View view)
-	{
+	public void onTimePickerClicked(View view) {
 		TimePickerFragment timePicker = new TimePickerFragment(game);
 		timePicker.setTimePickerDismissedListener(this);
 		timePicker.show(getFragmentManager(), "timePicker");
 	}
 
 	@Override
-	public void onTimerPickerDialogDismissed()
-	{
+	public void onTimerPickerDialogDismissed() {
 		updateTimeOnView();
 	}
 
-	private void updateTimeOnView()
-	{
-		((TextView)findViewById(R.id.game_time_label)).setText(new SimpleDateFormat("h:mm a").format(game.getGameDate()));
+	private void updateTimeOnView() {
+		((TextView) findViewById(R.id.game_time_label)).setText(new SimpleDateFormat("h:mm a").format(game.getGameDate()));
 	}
 }
