@@ -41,9 +41,11 @@ public class AddEditGameActivity extends Activity implements OnDatePickerDialogD
 		if (intent.hasExtra("GameObjectId")) {
 			isEditingGame = true;
 			String gameId = intent.getStringExtra("GameObjectId");
-			game.setObjectId(gameId);
+
+			ParseQuery<Game> gameQuery = new ParseQuery<>(Game.class);
+			gameQuery.whereEqualTo("objectId", gameId);
 			try {
-				game.fetchIfNeeded();
+				game = gameQuery.getFirst();
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
