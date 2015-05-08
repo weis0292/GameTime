@@ -18,12 +18,18 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
+			android:padding="12dp"
+			android:textSize="16sp"
+			android:textStyle="bold"
 			android:text="5/14/2015"/>
 
 		<TextView
 			android:id="@+id/game_detail_time_label"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:textSize="16sp"
+			android:padding="12dp"
+			android:textStyle="bold"
 			android:text="6:00 PM"/>
 
 	</LinearLayout>
@@ -31,29 +37,34 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:orientation="horizontal">
+		android:orientation="horizontal"
+		android:padding="12dp">
 
 		<ImageView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:src="@mipmap/ic_map_marker_grey600_24dp"/>
+			android:src="@mipmap/ic_map_marker_grey600_24dp"
+			android:padding="4dp"/>
 
 		<LinearLayout
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
-			android:orientation="vertical">
+			android:orientation="vertical"
+			android:padding="4dp">
 
 			<TextView
 				android:id="@+id/game_detail_location_description"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				android:padding="4dp"
 				android:text="Example Game Location Description"/>
 
 			<TextView
 				android:id="@+id/game_detail_location_address"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				android:padding="4dp"
 				android:text="123 Fake Address"/>
 
 		</LinearLayout>
