@@ -13,6 +13,8 @@ import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
+import java.util.List;
+
 import edu.umn.fingagunz.gametime.domain.Player;
 import edu.umn.fingagunz.gametime.util.CurrentUserUtil;
 
@@ -68,21 +70,21 @@ public class ProfileActivity extends Activity
 				// Save the name to the database.
 				ParseQuery<Player> playerQuery = new ParseQuery<>(Player.class);
 				playerQuery.whereEqualTo("playerName", name);
-				playerQuery.getFirstInBackground(new GetCallback<Player>()
+				List<Player> players = playerQuery.find();
+				if (players.size() == 0)
 				{
-					@Override
-					public void done(Player player, ParseException e)
+					Player player = new Player();
+					player.setName(name);
+					try
 					{
-						if (player == null)
-						{
-							player = new Player();
-							player.setName(name);
-							player.saveInBackground();
-						}
-
-						CurrentUserUtil.resetCurrentPlayer();
+						player.save();
+					} catch (ParseException e)
+					{
+						e.printStackTrace();
 					}
-				});
+				}
+
+				CurrentUserUtil.resetCurrentPlayer();
 
 				// Looks like we've gotten a valid name,
 				// let's get the heck outta here.
