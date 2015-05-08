@@ -54,9 +54,19 @@ public class AddExistingPlayerActivity extends ListActivity {
             e.printStackTrace();
         }
 
+
+        ParseQuery<TeamMember> query = new ParseQuery<>(TeamMember.class);
+        query.whereEqualTo("team", team);
+        query.whereEqualTo("player", existingPlayer);
         TeamMember newTeamMember = new TeamMember();
+        try {
+            newTeamMember = query.getFirst();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         newTeamMember.setPlayer(existingPlayer);
         newTeamMember.setTeam(team);
+
 
         try
         {

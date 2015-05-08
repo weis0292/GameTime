@@ -9,12 +9,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.parse.ParseException;
+import com.parse.ParseQuery;
 
+import edu.umn.fingagunz.gametime.domain.AttendanceCommitment;
 import edu.umn.fingagunz.gametime.domain.Player;
 import edu.umn.fingagunz.gametime.domain.Sport;
 import edu.umn.fingagunz.gametime.domain.Team;
 import edu.umn.fingagunz.gametime.domain.TeamMember;
 import edu.umn.fingagunz.gametime.parse.queryadapter.SpinnerSportsParseQueryAdapter;
+import edu.umn.fingagunz.gametime.util.CurrentUserUtil;
 
 
 public class AddEditTeamActivity extends Activity
@@ -67,7 +70,15 @@ public class AddEditTeamActivity extends Activity
             try { player.fetchIfNeeded(); }
             catch (ParseException e) { e.printStackTrace(); }
 
+            ParseQuery<TeamMember> query = new ParseQuery<>(TeamMember.class);
+            query.whereEqualTo("team", newTeam);
+            query.whereEqualTo("player", player);
             TeamMember newTeamMember = new TeamMember();
+            try {
+                newTeamMember = query.getFirst();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             newTeamMember.setPlayer(player);
             newTeamMember.setIsCaptain(true);
             newTeamMember.setTeam(newTeam);

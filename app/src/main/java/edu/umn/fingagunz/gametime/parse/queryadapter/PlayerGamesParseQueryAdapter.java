@@ -12,6 +12,8 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 
+import java.text.SimpleDateFormat;
+
 import edu.umn.fingagunz.gametime.R;
 import edu.umn.fingagunz.gametime.domain.AttendanceCommitment;
 import edu.umn.fingagunz.gametime.domain.Game;
@@ -86,9 +88,7 @@ public class PlayerGamesParseQueryAdapter extends ParseQueryAdapter<Game>
         }
 
 		((TextView)v.findViewById(R.id.game_location_description_label)).setText(game.getLocationDescription());
-
-        //TODO  this still needs some datetime formatting..
-		((TextView)v.findViewById(R.id.game_dateTime_label)).setText(game.getGameDate().toString());
+        ((TextView)v.findViewById(R.id.game_dateTime_label)).setText(new SimpleDateFormat("E MMM d, yyyy h:mm a").format(game.getGameDate()));
 
 		return v;
 	}
