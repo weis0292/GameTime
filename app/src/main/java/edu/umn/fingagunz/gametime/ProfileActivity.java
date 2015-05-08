@@ -9,9 +9,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+
+import edu.umn.fingagunz.gametime.domain.Player;
+
 
 public class ProfileActivity extends Activity
 {
+	private Player player = new Player();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -22,8 +29,30 @@ public class ProfileActivity extends Activity
 		Intent intent = getIntent();
 		String name = intent.getStringExtra(getString(R.string.profile_name_key));
 		((EditText)findViewById(R.id.profile_name_edit)).setText(name);
+
+		ParseQuery<Player> playerQuery = new ParseQuery<>(Player.class);
+		playerQuery.whereEqualTo("playerName", name);
+		playerQuery.getFirstInBackground(new GetCallback<Player>()
+		{
+			@Override
+			public void done(Player player, ParseException e)
+			{
+				if (player != null)
+				{
+					setPlayer(player);
+				}
+				else
+				{
+					setPlayer(new Player());
+				}
+			}
+		});
 	}
 
+	private void setPlayer(Player player)
+	{
+		this.player = player;
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
@@ -58,6 +87,10 @@ public class ProfileActivity extends Activity
 					.edit()
 					.putString(getString(R.string.profile_name_key), name)
 					.commit();
+
+				// Save the name to the database.
+				player.setName(name);
+				player.saveInBackground();
 
 				// Looks like we've gotten a valid name,
 				// let's get the heck outta here.
