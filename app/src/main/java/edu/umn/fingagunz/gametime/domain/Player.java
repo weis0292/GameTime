@@ -30,7 +30,7 @@ public class Player extends ParseObject {
     public void setEmail(String email) { put("playerEmail", email); }
     public void setGender(String gender) {
         String g = "M";
-        if(gender=="Female"){g = "F";}
+        if(gender.equals("Female")){g = "F";}
         put("playerGender", g);
     }
 }
