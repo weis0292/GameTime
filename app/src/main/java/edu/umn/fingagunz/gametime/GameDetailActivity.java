@@ -168,4 +168,10 @@ public class GameDetailActivity extends Activity {
 
 		return super.onOptionsItemSelected(item);
 	}
+
+	@Override
+	protected void onRestart()
+	{
+		super.onRestart();
+	}
 }
