@@ -67,21 +67,21 @@ public class ProfileActivity extends Activity
 					.putString(getString(R.string.profile_name_key), name)
 					.commit();
 
-				// Save the name to the database.
-				ParseQuery<Player> playerQuery = new ParseQuery<>(Player.class);
-				playerQuery.whereEqualTo("playerName", name);
-				List<Player> players = playerQuery.find();
-				if (players.size() == 0)
+				try
 				{
-					Player player = new Player();
-					player.setName(name);
-					try
+					// Save the name to the database.
+					ParseQuery<Player> playerQuery = new ParseQuery<>(Player.class);
+					playerQuery.whereEqualTo("playerName", name);
+					List<Player> players = playerQuery.find();
+					if (players.size() == 0)
 					{
+						Player player = new Player();
+						player.setName(name);
 						player.save();
-					} catch (ParseException e)
-					{
-						e.printStackTrace();
 					}
+				} catch (ParseException e)
+				{
+					e.printStackTrace();
 				}
 
 				CurrentUserUtil.resetCurrentPlayer();
