@@ -24,7 +24,6 @@ import java.util.List;
 import edu.umn.fingagunz.gametime.domain.Player;
 import edu.umn.fingagunz.gametime.domain.Team;
 import edu.umn.fingagunz.gametime.domain.TeamMember;
-import edu.umn.fingagunz.gametime.listadapter.PlayerListAdapter;
 import edu.umn.fingagunz.gametime.parse.queryadapter.TeamPlayersParseQueryAdapter;
 
 
@@ -97,9 +96,7 @@ public class TeamDetailPlayersFragment extends ListFragment {
 					players.add(member.getPlayer());
 				}
 
-				//PlayerListAdapter adapter = new PlayerListAdapter(getActivity(), R.layout.fragment_team_detail_players_row, players.toArray(new Player[players.size()]));
-				TeamPlayersParseQueryAdapter adapter = new TeamPlayersParseQueryAdapter(getActivity(), team);
-				setListAdapter(adapter);
+				setListAdapter(createListAdapter());
 			}
 		}
 
@@ -183,6 +180,17 @@ public class TeamDetailPlayersFragment extends ListFragment {
 		}
 
 		return false; // http://developer.android.com/reference/android/app/Fragment.html#onOptionsItemSelected(android.view.MenuItem)
-		//return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		setListAdapter(createListAdapter());
+	}
+
+	private TeamPlayersParseQueryAdapter createListAdapter() {
+		TeamDetailActivity activity = (TeamDetailActivity) getActivity();
+		Team team = activity.getSelectedTeam();
+		return new TeamPlayersParseQueryAdapter(activity, team);
 	}
 }
