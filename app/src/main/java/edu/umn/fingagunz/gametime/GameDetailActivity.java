@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -57,9 +56,11 @@ public class GameDetailActivity extends Activity {
 		Intent intent = getIntent();
 		String gameId = intent.getStringExtra("gameId");
 		String playerId = intent.getStringExtra("playerId");
-		game.setObjectId(gameId);
+
+		ParseQuery<Game> gameQuery = new ParseQuery<>(Game.class);
+		gameQuery.whereEqualTo("objectId", gameId);
 		try {
-			game.fetchIfNeeded();
+			game = gameQuery.getFirst();
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
