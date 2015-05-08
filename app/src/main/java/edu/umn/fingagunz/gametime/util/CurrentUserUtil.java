@@ -1,6 +1,5 @@
 package edu.umn.fingagunz.gametime.util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -13,24 +12,29 @@ import edu.umn.fingagunz.gametime.domain.Player;
  * Created by Jesse on 5/7/2015.
  */
 public class CurrentUserUtil {
+	private static Player currentPlayer = null;
 
 	public static Player getCurrentPlayer(Context context) {
-		String currentUser = getCurrentUser(context);
-		if (currentUser == null || "".equals(currentUser)) {
-			return null;
+		if (currentPlayer == null) {
+			String currentUser = getCurrentUser(context);
+			if (currentUser == null || "".equals(currentUser)) {
+				return null;
+			}
+
+			Player player = null;
+
+			ParseQuery<Player> query = new ParseQuery<>(Player.class);
+			query.whereEqualTo("playerName", currentUser);
+			try {
+				player = query.getFirst();
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+
+			currentPlayer = player;
 		}
 
-		Player player = null;
-
-		ParseQuery<Player> query = new ParseQuery<>(Player.class);
-		query.whereEqualTo("playerName", currentUser);
-		try {
-			player = query.getFirst();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-
-		return player;
+		return currentPlayer;
 	}
 
 	public static String getCurrentUser(Context context) {
