@@ -14,6 +14,10 @@ import edu.umn.fingagunz.gametime.domain.Player;
 public class CurrentUserUtil {
 	private static Player currentPlayer = null;
 
+	public static void resetCurrentPlayer() {
+		currentPlayer = null;
+	}
+
 	public static Player getCurrentPlayer(Context context) {
 		if (currentPlayer == null) {
 			String currentUser = getCurrentUser(context);
