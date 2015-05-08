@@ -86,6 +86,8 @@ public class PlayerGamesParseQueryAdapter extends ParseQueryAdapter<Game>
         }
 
 		((TextView)v.findViewById(R.id.game_location_description_label)).setText(game.getLocationDescription());
+
+        //TODO  this still needs some datetime formatting..
 		((TextView)v.findViewById(R.id.game_dateTime_label)).setText(game.getGameDate().toString());
 
 		return v;
