@@ -26,7 +26,7 @@ public class TeamDetailActivity
 
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		actionBar.setDisplayShowTitleEnabled(false);
+		actionBar.setDisplayShowTitleEnabled(true);
 
 		ActionBar.Tab gamesTab =
 				actionBar
