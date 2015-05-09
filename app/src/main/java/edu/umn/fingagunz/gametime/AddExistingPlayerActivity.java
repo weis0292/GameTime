@@ -23,7 +23,7 @@ import edu.umn.fingagunz.gametime.domain.Team;
 import edu.umn.fingagunz.gametime.domain.TeamMember;
 import edu.umn.fingagunz.gametime.parse.queryadapter.PlayersParseQueryAdapter;
 
-
+// Class to support adding an existing player from the Gametime servers
 public class AddExistingPlayerActivity extends ListActivity {
 
     @Override
@@ -39,10 +39,13 @@ public class AddExistingPlayerActivity extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id)
     {
+        // Figure out which item in the list was clicked
         super.onListItemClick(l, v, position, id);
 
+        // get that player ID from the clicked position
         Player existingPlayer = (Player)v.getTag();
 
+        // Get an intent to figure out which team the player is on
         Intent teamIdIntent = getIntent();
         String teamId = teamIdIntent.getStringExtra("TeamObjectId");
 
@@ -54,7 +57,7 @@ public class AddExistingPlayerActivity extends ListActivity {
             e.printStackTrace();
         }
 
-
+        // Find possible existing team and existing player
         ParseQuery<TeamMember> query = new ParseQuery<>(TeamMember.class);
         query.whereEqualTo("team", team);
         query.whereEqualTo("player", existingPlayer);
@@ -64,9 +67,10 @@ public class AddExistingPlayerActivity extends ListActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        // Set the player to the team
         newTeamMember.setPlayer(existingPlayer);
         newTeamMember.setTeam(team);
-
 
         try
         {

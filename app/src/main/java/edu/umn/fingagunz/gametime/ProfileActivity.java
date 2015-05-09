@@ -17,13 +17,14 @@ import java.util.List;
 import edu.umn.fingagunz.gametime.domain.Player;
 import edu.umn.fingagunz.gametime.util.CurrentUserUtil;
 
-
+// Set up the class to create new user profiles
 public class ProfileActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile);
 
+		// get the profile name of the intent
 		Intent intent = getIntent();
 		String name = intent.getStringExtra(getString(R.string.profile_name_key));
 		((EditText) findViewById(R.id.profile_name_edit)).setText(name);

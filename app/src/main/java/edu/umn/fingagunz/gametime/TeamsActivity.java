@@ -16,6 +16,7 @@ import com.parse.ParseObject;
 import edu.umn.fingagunz.gametime.domain.Player;
 import edu.umn.fingagunz.gametime.util.CurrentUserUtil;
 
+// This class shows the teams for a selected profile.
 public class TeamsActivity extends ListActivity {
 
 	@Override

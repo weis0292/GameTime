@@ -11,7 +11,7 @@ import com.parse.ParseQuery;
 
 import edu.umn.fingagunz.gametime.domain.Team;
 
-
+// Class to show the team details screen
 public class TeamDetailActivity
 		extends Activity
 		implements OnFragmentInteractionListener {
@@ -21,9 +21,12 @@ public class TeamDetailActivity
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+
+		// During the create, set the view to the activity_team_detail XML screen
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_team_detail);
 
+		// get the appropriate Action Bar
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setDisplayShowTitleEnabled(true);

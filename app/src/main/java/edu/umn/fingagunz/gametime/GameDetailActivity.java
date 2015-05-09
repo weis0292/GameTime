@@ -19,6 +19,7 @@ import edu.umn.fingagunz.gametime.domain.AttendanceCommitment;
 import edu.umn.fingagunz.gametime.domain.Game;
 import edu.umn.fingagunz.gametime.domain.Player;
 
+// Set up the screen to view the details about a particular game
 public class GameDetailActivity extends Activity {
 	final private static int REPLY_ACCEPT = 0x00;
 	final private static int REPLY_MAYBE = 0x01;
@@ -32,6 +33,7 @@ public class GameDetailActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game_detail);
 
+		// set up click listeners. This is so if a user selects that they can accept or decline a game
 		getAcceptImageView().setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -53,6 +55,7 @@ public class GameDetailActivity extends Activity {
 			}
 		});
 
+		// Get the intent to find the gameID's and playerID's
 		Intent intent = getIntent();
 		String gameId = intent.getStringExtra("gameId");
 		String playerId = intent.getStringExtra("playerId");
@@ -65,20 +68,26 @@ public class GameDetailActivity extends Activity {
 			e.printStackTrace();
 		}
 
+		// Null check on the game date data. If available set the game date
 		if (game.getGameDate() != null)
 		{
 			((TextView) findViewById(R.id.game_detail_date_label)).setText(new SimpleDateFormat("E MMM d, yyyy").format(game.getGameDate()));
 			((TextView) findViewById(R.id.game_detail_time_label)).setText(new SimpleDateFormat("h:mm a").format(game.getGameDate()));
 		}
+
+		// If the game location is available set the game location
 		if (game.getLocationDescription() != null)
 		{
 			((TextView) findViewById(R.id.game_detail_location_description)).setText(game.getLocationDescription());
 		}
+
+		// If the game address is available, set the game address
 		if (game.getAddress() != null)
 		{
 			((TextView) findViewById(R.id.game_detail_location_address)).setText(game.getAddress());
 		}
 
+		// Create a player object and set the player ID
 		Player player = new Player();
 		player.setObjectId(playerId);
 
@@ -120,12 +129,14 @@ public class GameDetailActivity extends Activity {
 		}
 	}
 
+	// Set up the ICONs used to reply to game attendence
 	private void setReplyIcons(int reply) {
 		getAcceptImageView().setImageResource(reply == REPLY_ACCEPT ? R.mipmap.ic_thumb_up_black_36dp : R.mipmap.ic_thumb_up_grey600_36dp);
 		getMaybeImageView().setImageResource(reply == REPLY_MAYBE ? R.mipmap.ic_thumbs_up_down_black_36dp : R.mipmap.ic_thumbs_up_down_grey600_36dp);
 		getDeclineImageView().setImageResource(reply == REPLY_DECLINE ? R.mipmap.ic_thumb_down_black_36dp : R.mipmap.ic_thumb_down_grey600_36dp);
 	}
 
+	// Set the reply in the GAMETIME app as yes no or maybe
 	private void setReply(int reply) {
 		String rsvpCode = reply == REPLY_ACCEPT ? "Yes" : (reply == REPLY_MAYBE ? "Maybe" : "No");
 		attendanceCommitment.setRSVPCode(rsvpCode);
@@ -137,6 +148,7 @@ public class GameDetailActivity extends Activity {
 		setReplyIcons(reply);
 	}
 
+	// Get the correct images!
 	private ImageView getAcceptImageView() {
 		return (ImageView) findViewById(R.id.game_detail_accept_icon);
 	}

@@ -36,12 +36,12 @@ import edu.umn.fingagunz.gametime.parse.queryadapter.TeamPlayersParseQueryAdapte
  * create an instance of this fragment.
  */
 public class TeamDetailPlayersFragment extends ListFragment {
-	// TODO: Rename parameter arguments, choose names that match
+
 	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 	private static final String ARG_PARAM1 = "param1";
 	private static final String ARG_PARAM2 = "param2";
 
-	// TODO: Rename and change types of parameters
+
 	private String mParam1;
 	private String mParam2;
 
@@ -55,7 +55,6 @@ public class TeamDetailPlayersFragment extends ListFragment {
 	 * @param param2 Parameter 2.
 	 * @return A new instance of fragment TeamDetailPlayersFragment.
 	 */
-	// TODO: Rename and change types and number of parameters
 	public static TeamDetailPlayersFragment newInstance(String param1, String param2) {
 		TeamDetailPlayersFragment fragment = new TeamDetailPlayersFragment();
 		Bundle args = new Bundle();
@@ -111,7 +110,6 @@ public class TeamDetailPlayersFragment extends ListFragment {
 		return inflater.inflate(R.layout.fragment_team_detail_players, container, false);
 	}
 
-	// TODO: Rename method, update argument and hook method into UI event
 	public void onButtonPressed(Uri uri) {
 		if (mListener != null) {
 			mListener.onFragmentInteraction(uri);

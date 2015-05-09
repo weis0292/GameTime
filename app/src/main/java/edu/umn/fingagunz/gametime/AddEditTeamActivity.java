@@ -19,7 +19,7 @@ import edu.umn.fingagunz.gametime.domain.TeamMember;
 import edu.umn.fingagunz.gametime.parse.queryadapter.SpinnerSportsParseQueryAdapter;
 import edu.umn.fingagunz.gametime.util.CurrentUserUtil;
 
-
+// Class for controlling the screen to create new teams
 public class AddEditTeamActivity extends Activity
 {
 
@@ -62,7 +62,7 @@ public class AddEditTeamActivity extends Activity
 			try { newTeam.save(); }
 			catch (ParseException ex) { }
 
-
+			// Get the intent for this call and set the player ID from the intent
             Intent playerIdIntent = getIntent();
             String playerId = playerIdIntent.getStringExtra("playerId");
             Player player = new Player();

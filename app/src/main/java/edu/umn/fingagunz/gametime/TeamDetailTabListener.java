@@ -7,6 +7,7 @@ import android.app.FragmentTransaction;
 
 /**
  * Created by WeispfeM on 4/24/2015.
+ * This listens for tab selections in the team details screen
  */
 public class TeamDetailTabListener<T extends Fragment> implements ActionBar.TabListener
 {

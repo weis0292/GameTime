@@ -21,27 +21,37 @@ import edu.umn.fingagunz.gametime.domain.Game;
 import edu.umn.fingagunz.gametime.domain.Team;
 import edu.umn.fingagunz.gametime.domain.TeamMember;
 
-
+//*************************************************************************************************
+// AddEditGameActivity will control the screens to add games to the GameTime App.
+//************************************************************************************************
 public class AddEditGameActivity extends Activity implements OnDatePickerDialogDismissedListener, OnTimePickerDialogDismissedListener {
+
+	// Create a new game object
 	private Game game = new Game();
 	private Boolean isEditingGame = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+
+		// Set the layout of the screen to the add edit game XML
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_edit_game);
 
+		// Grab where we are coming from
 		Intent intent = getIntent();
 
+		// Get the teamID from the inten and set the team object for this game
 		String teamId = intent.getStringExtra("TeamObjectId");
 		Team team = new Team();
 		team.setObjectId(teamId);
 		game.setTeam(team);
 
+		// If there is already a game in this intent then we are editing
 		if (intent.hasExtra("GameObjectId")) {
 			isEditingGame = true;
 			String gameId = intent.getStringExtra("GameObjectId");
 
+			// Grab the old game data
 			ParseQuery<Game> gameQuery = new ParseQuery<>(Game.class);
 			gameQuery.whereEqualTo("objectId", gameId);
 			try {
@@ -53,6 +63,7 @@ public class AddEditGameActivity extends Activity implements OnDatePickerDialogD
 			game.setGameDate(new Date());
 		}
 
+		// Update the views of date and time
 		updateDateOnView();
 		updateTimeOnView();
 		((EditText) findViewById(R.id.game_edit_description)).setText(game.getLocationDescription());
@@ -81,10 +92,16 @@ public class AddEditGameActivity extends Activity implements OnDatePickerDialogD
 //		}
 
 		switch (item.getItemId()) {
+
+			// If we are accepting the new game or edited game, save the data off
 			case R.id.action_accept:
+
+				// Set up the location and addresses
 				game.setLocationDescription(((EditText) findViewById(R.id.game_edit_description)).getText().toString());
 				game.setAddress(((EditText) findViewById(R.id.game_edit_address)).getText().toString());
 				try {
+
+					// Save the game to the server
 					game.save();
 
 					if (!isEditingGame) {
@@ -140,6 +157,7 @@ public class AddEditGameActivity extends Activity implements OnDatePickerDialogD
 		updateTimeOnView();
 	}
 
+	// Update the view on the gametime app!
 	private void updateTimeOnView() {
 		Date gameDate = game.getGameDate();
 		if (gameDate != null) {

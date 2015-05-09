@@ -22,7 +22,7 @@ import edu.umn.fingagunz.gametime.domain.Team;
 import edu.umn.fingagunz.gametime.domain.TeamMember;
 import edu.umn.fingagunz.gametime.parse.queryadapter.SpinnerSportsParseQueryAdapter;
 
-
+// Class for adding or editing a player to the gametime application
 public class AddEditPlayerActivity extends Activity
 {
 
@@ -59,7 +59,7 @@ public class AddEditPlayerActivity extends Activity
             newPlayer.setEmail(((EditText) findViewById(R.id.add_edit_player_email)).getText().toString());
             newPlayer.setGender(((Spinner) findViewById(R.id.add_edit_player_gender)).getSelectedItem().toString());
 
-
+            // Grap the new player ID.
             ParseQuery<Player> query = new ParseQuery<>(Player.class);
             query.whereEqualTo("playerName", newPlayer.getName());
             Player existingPlayer = new Player();
@@ -83,10 +83,11 @@ public class AddEditPlayerActivity extends Activity
                 ex.printStackTrace();
             }
 
-
+            // Get the intent coming into this screen
             Intent teamIdIntent = getIntent();
             String teamId = teamIdIntent.getStringExtra("TeamObjectId");
 
+            // create a team object with the intents ID
             Team team = new Team();
             team.setObjectId(teamId);
             try {
@@ -94,6 +95,7 @@ public class AddEditPlayerActivity extends Activity
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+
 
             ParseQuery<TeamMember> teamMemberQuery = new ParseQuery<>(TeamMember.class);
             teamMemberQuery.whereEqualTo("team", team);
